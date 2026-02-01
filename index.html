@@ -22,17 +22,43 @@
   <meta name="twitter:description" content="An invite-only research convening bringing together researchers with original approaches to data, hardware, and real-world systems.">
   <meta name="twitter:image" content="[TBD]">
 
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" href="assets/favicon.svg">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Navigation -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="#hero" class="nav-logo">E184 × NeuroNYC</a>
+      <a href="#hero" class="nav-brand">
+        <svg class="nav-logo-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <line x1="16" y1="20" x2="32" y2="14"/>
+            <line x1="32" y1="14" x2="48" y2="22"/>
+            <line x1="32" y1="14" x2="28" y2="32"/>
+            <line x1="16" y1="20" x2="20" y2="38"/>
+            <line x1="20" y1="38" x2="28" y2="32"/>
+            <line x1="28" y1="32" x2="44" y2="36"/>
+            <line x1="48" y1="22" x2="44" y2="36"/>
+            <line x1="44" y1="36" x2="36" y2="50"/>
+            <line x1="20" y1="38" x2="36" y2="50"/>
+          </g>
+          <g fill="currentColor">
+            <circle cx="16" cy="20" r="3"/>
+            <circle cx="32" cy="14" r="3.5"/>
+            <circle cx="48" cy="22" r="2.5"/>
+            <circle cx="28" cy="32" r="3"/>
+            <circle cx="20" cy="38" r="2.5"/>
+            <circle cx="44" cy="36" r="3"/>
+            <circle cx="36" cy="50" r="2.5"/>
+          </g>
+        </svg>
+        <span class="nav-logo">E184 × NeuroNYC</span>
+      </a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#program">Program</a></li>
-        <li><a href="#speakers">Speakers</a></li>
+        <li><a href="#speakers">Panelists</a></li>
         <li><a href="#partners">Partners</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -43,11 +69,15 @@
     <!-- Hero Section -->
     <section id="hero" class="hero">
       <div class="container">
-        <p class="hero-eyebrow">E184 × NeuroNYC Research Convening</p>
-        <h1 class="hero-title">Foundation Models for the Brain</h1>
-        <p class="hero-subtitle">Laying the groundwork for the next stage in neurotech and AI</p>
-        <p class="hero-description">An invite-only research convening bringing together researchers with original approaches to data, hardware, and real-world systems.</p>
-        <p class="hero-meta">March 26 · 5–9 PM · Brown Rudnick, New York City</p>
+        <div class="hero-primary">
+          <p class="hero-eyebrow">E184 × NeuroNYC Research Convening</p>
+          <h1 class="hero-title">Foundation Models for the Brain</h1>
+          <p class="hero-subtitle">Laying the groundwork for the next stage in neurotech and AI</p>
+        </div>
+        <div class="hero-secondary">
+          <p class="hero-description">An invite-only evening bringing together researchers with original approaches to data, hardware, and real-world systems.</p>
+          <p class="hero-meta">March 26<span class="hero-meta-divider"></span>5–9 PM<span class="hero-meta-divider"></span>Brown Rudnick, NYC</p>
+        </div>
         <a href="#contact" class="cta-button">Request an invite</a>
       </div>
     </section>
@@ -57,7 +87,7 @@
       <div class="container">
         <h2 class="section-title">About</h2>
         <div class="about-content">
-          <p>This research convening brings together researchers working on foundation models for neural data and adjacent NeuroAI methods. The goal is not consensus, but clarity: what's working, what's missing, and which technical bets matter most over the next 12–24 months. The program combines short panels with substantial time for discussion and cross-pollination.</p>
+          <p>As brain foundation models take shape, progress depends on the right people being in dialogue—across methods, sensing modalities, data infrastructure, and real-world systems. This invite-only evening convenes researchers and practitioners to compare approaches, surface disagreements, and help each other build better. Short panels open the conversation; most of the time is reserved for discussion.</p>
         </div>
       </div>
     </section>
@@ -97,24 +127,23 @@
       </div>
     </section>
 
-    <!-- Speakers Section -->
+    <!-- Panelists Section -->
     <section id="speakers" class="section">
       <div class="container">
-        <h2 class="section-title">Speakers</h2>
-        <p class="speakers-subheading">Speakers to be announced</p>
-        <p class="speakers-note">Speaker list will be posted as invitations are confirmed.</p>
+        <h2 class="section-title">Panelists</h2>
+        <p class="speakers-subheading">To be announced</p>
+        <p class="speakers-note">Panelist list will be posted as invitations are confirmed.</p>
       </div>
     </section>
 
     <!-- Partners Section -->
     <section id="partners" class="section section-alt">
       <div class="container">
-        <h2 class="section-title">Partners & Hosts</h2>
-        <p class="partners-intro">Hosted by e184 and NeuroNYC · Venue partner: Brown Rudnick</p>
-        <div class="partners-logos">
-          <img src="assets/e184.png" alt="e184" class="partner-logo-img">
-          <img src="assets/Neuronyclogo.jpeg" alt="NeuroNYC" class="partner-logo-img">
-          <img src="assets/BrownRudnick.png" alt="Brown Rudnick" class="partner-logo-img">
+        <h2 class="section-title">Hosts & Venue</h2>
+        <div class="partners-list">
+          <p class="partner-item"><a href="https://e184.org" target="_blank" rel="noopener">e184</a> <span class="partner-role">— co-host</span></p>
+          <p class="partner-item"><a href="https://neuronyc.org" target="_blank" rel="noopener">NeuroNYC</a> <span class="partner-role">— co-host</span></p>
+          <p class="partner-item"><a href="https://brownrudnick.com" target="_blank" rel="noopener">Brown Rudnick</a> <span class="partner-role">— venue partner</span></p>
         </div>
       </div>
     </section>
@@ -123,7 +152,7 @@
     <section id="contact" class="section">
       <div class="container">
         <h2 class="section-title">Contact</h2>
-        <p class="contact-intro">For invitations and program questions, contact Margot Hanley (NeuroNYC).</p>
+        <p class="contact-intro">Questions? Contact Margot Hanley (NeuroNYC).</p>
         <form id="contactForm" class="contact-form">
           <div class="form-row">
             <div class="form-group">
@@ -141,7 +170,6 @@
           </div>
           <button type="submit" class="cta-button">Send request</button>
         </form>
-        <p class="contact-email">Email: <a href="mailto:[TBD-email]">[TBD-email]</a></p>
       </div>
     </section>
   </main>

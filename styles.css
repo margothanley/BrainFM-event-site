@@ -24,6 +24,7 @@
   --spacing-2xl: 4rem;
 
   --max-width: 680px;
+  --max-width-hero: 800px;
   --border-radius: 10px;
   --transition: 0.2s ease;
 }
@@ -107,6 +108,18 @@ a:hover {
   align-items: center;
 }
 
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-logo-mark {
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-light);
+}
+
 .nav-logo {
   font-weight: 500;
   font-size: 0.6875rem;
@@ -148,55 +161,75 @@ a:hover {
   letter-spacing: -0.02em;
 }
 
-/* Hero Section - Tighter */
+/* Hero Section - Sophisticated Layout */
 .hero {
-  padding: 4.5rem 0 3.5rem;
+  padding: 7rem 0 4rem;
   text-align: center;
+}
+
+.hero .container {
+  max-width: var(--max-width-hero);
+}
+
+/* Primary cluster: eyebrow + title + subtitle */
+.hero-primary {
+  margin-bottom: 2.5rem;
 }
 
 .hero-eyebrow {
   font-size: 0.6875rem;
   font-weight: 500;
   color: var(--color-text-light);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: 1rem;
 }
 
 .hero-title {
-  font-size: clamp(1.625rem, 4vw, 2.25rem);
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
   letter-spacing: -0.03em;
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: 0.75rem;
+  line-height: 1.1;
 }
 
 .hero-subtitle {
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   color: var(--color-text-muted);
-  max-width: 480px;
-  margin: 0 auto var(--spacing-xs);
+  max-width: 520px;
+  margin: 0 auto;
   font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Secondary cluster: description + meta */
+.hero-secondary {
+  margin-bottom: 2rem;
 }
 
 .hero-description {
   font-size: 0.9375rem;
   color: var(--color-text-muted);
-  max-width: 520px;
-  margin: 0 auto var(--spacing-sm);
-  line-height: 1.6;
+  max-width: 540px;
+  margin: 0 auto 1.25rem;
+  line-height: 1.65;
 }
 
 .hero-meta {
   font-size: 0.8125rem;
-  color: var(--color-text-light);
-  letter-spacing: 0.015em;
-  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  color: var(--color-text);
+  letter-spacing: 0.02em;
 }
 
-.hero-hosts {
-  font-size: 0.75rem;
-  color: var(--color-text-light);
-  margin-bottom: var(--spacing-md);
+.hero-meta-divider {
+  display: inline-block;
+  width: 1px;
+  height: 12px;
+  background: var(--color-text-light);
+  margin: 0 0.75rem;
+  vertical-align: middle;
+  opacity: 0.4;
 }
 
 /* CTA Button */
@@ -286,30 +319,29 @@ a:hover {
 }
 
 /* Partners Section */
-.partners-intro {
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  margin-bottom: var(--spacing-md);
-}
-
-.partners-logos {
+.partners-list {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 1.75rem;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.partner-logo-img {
-  height: 32px;
-  width: auto;
-  object-fit: contain;
-  opacity: 0.85;
-  transition: opacity var(--transition);
+.partner-item {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
 }
 
-.partner-logo-img:hover {
-  opacity: 1;
+.partner-item a {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.partner-item a:hover {
+  color: var(--color-accent);
+}
+
+.partner-role {
+  color: var(--color-text-light);
+  font-size: 0.8125rem;
 }
 
 /* Contact Section */
@@ -408,7 +440,15 @@ a:hover {
   }
 
   .hero {
-    padding: 4rem 0 2.5rem;
+    padding: 5.5rem 0 3rem;
+  }
+
+  .hero-primary {
+    margin-bottom: 2rem;
+  }
+
+  .hero-secondary {
+    margin-bottom: 1.5rem;
   }
 
   .section {
@@ -447,23 +487,19 @@ a:hover {
   }
 
   .hero {
-    padding: 3.5rem 0 2rem;
+    padding: 4.5rem 0 2.5rem;
   }
 
   .hero-title {
-    font-size: 1.375rem;
+    font-size: 1.625rem;
   }
 
   .hero-subtitle {
-    font-size: 0.9375rem;
+    font-size: 1rem;
   }
 
   .hero-meta {
     font-size: 0.75rem;
-  }
-
-  .hero-hosts {
-    font-size: 0.6875rem;
   }
 
   .hero-eyebrow {
@@ -472,6 +508,14 @@ a:hover {
 
   .hero-description {
     font-size: 0.875rem;
+  }
+
+  .hero-primary {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-secondary {
+    margin-bottom: 1.25rem;
   }
 
   .partner-logo-img {
