@@ -998,90 +998,62 @@
         }
       }
 
-      // Constant-velocity easing (linear with soft ends)
-      function easeLinearSoft(t) {
-        // Mostly linear but with gentle ease at very start/end
-        if (t < 0.1) return t * t * 5; // soft start
-        if (t > 0.9) return 1 - (1 - t) * (1 - t) * 5; // soft end
-        return t;
-      }
-
-      // Get phase and progress within that phase
-      function getAnimationState(time) {
-        const { emergence, meshLinger, dissolution } = CONFIG.timing;
-        const totalCycle = emergence + meshLinger + dissolution;
-        const loopTime = time % totalCycle;
-
-        if (loopTime < emergence) {
-          // Phase 1: Emergence (scatter → cluster → structure)
-          return {
-            phase: 'emergence',
-            progress: easeLinearSoft(loopTime / emergence)
-          };
-        } else if (loopTime < emergence + meshLinger) {
-          // Phase 2: Mesh visible, breathing (the meaningful state)
-          return {
-            phase: 'mesh',
-            progress: (loopTime - emergence) / meshLinger
-          };
-        } else {
-          // Phase 3: Gentle dissolution
-          return {
-            phase: 'dissolution',
-            progress: easeLinearSoft((loopTime - emergence - meshLinger) / dissolution)
-          };
-        }
+      // Single continuous progress: 0 → 1 (to structure) → 0 (back to scatter)
+      // Using sine wave for perfectly smooth, never-stopping motion
+      function getProgress(time) {
+        const cycleDuration = 16; // seconds for full cycle
+        // Sine gives us 0→1→0 smoothly with NO flat spots
+        return (Math.sin(time * (2 * Math.PI / cycleDuration) - Math.PI / 2) + 1) / 2;
       }
 
       function updateDots() {
-        const state = getAnimationState(animationTime);
-
         dots.forEach(dot => {
-          // Slight per-dot timing offset for organic feel
-          const dotState = getAnimationState(animationTime + dot.phaseOffset * 2);
+          // Each dot has slight timing offset for organic feel
+          const dotProgress = getProgress(animationTime + dot.phaseOffset * 3);
 
-          // Continuous micro-movement (always present, very subtle)
-          const breathe = Math.sin(animationTime * 0.3 + dot.driftPhase) * 2;
-          const breatheY = Math.cos(animationTime * 0.25 + dot.driftPhase) * 2;
+          // Continuous micro-drift (always moving, never frozen)
+          const drift = Math.sin(animationTime * 0.4 + dot.driftPhase) * 2.5;
+          const driftY = Math.cos(animationTime * 0.35 + dot.driftPhase) * 2.5;
 
+          // CONTINUOUS interpolation: scatter → cluster → structure → cluster → scatter
+          // No phases, no stops - just smooth position based on progress
           let goalX, goalY;
 
-          if (dotState.phase === 'emergence') {
-            // Smooth, constant-velocity emergence: scatter → cluster → structure
-            const p = dotState.progress;
-
-            if (p < 0.5) {
-              // First half: scatter → cluster
-              const t = p * 2;
-              goalX = dot.scatterX + (dot.clusterX - dot.scatterX) * t;
-              goalY = dot.scatterY + (dot.clusterY - dot.scatterY) * t;
+          if (dotProgress < 0.5) {
+            // 0 to 0.5: scatter → cluster → structure
+            const t = dotProgress * 2; // 0 to 1
+            if (t < 0.5) {
+              // scatter → cluster
+              const tt = t * 2;
+              goalX = dot.scatterX + (dot.clusterX - dot.scatterX) * tt;
+              goalY = dot.scatterY + (dot.clusterY - dot.scatterY) * tt;
             } else {
-              // Second half: cluster → structure
-              const t = (p - 0.5) * 2;
-              goalX = dot.clusterX + (dot.structuredX - dot.clusterX) * t;
-              goalY = dot.clusterY + (dot.structuredY - dot.clusterY) * t;
+              // cluster → structure
+              const tt = (t - 0.5) * 2;
+              goalX = dot.clusterX + (dot.structuredX - dot.clusterX) * tt;
+              goalY = dot.clusterY + (dot.structuredY - dot.clusterY) * tt;
             }
-
-            // Drift decreases as we approach structure
-            const driftAmount = 1 - p * 0.8;
-            goalX += breathe * driftAmount;
-            goalY += breatheY * driftAmount;
-
-          } else if (dotState.phase === 'mesh') {
-            // Mesh is visible - subtle breathing movement, NOT frozen
-            goalX = dot.structuredX + breathe * 0.4;
-            goalY = dot.structuredY + breatheY * 0.4;
-
           } else {
-            // Gentle dissolution back to scattered
-            const p = dotState.progress;
-            goalX = dot.structuredX + (dot.scatterX - dot.structuredX) * p;
-            goalY = dot.structuredY + (dot.scatterY - dot.structuredY) * p;
-
-            // Drift increases as structure dissolves
-            goalX += breathe * (0.4 + p * 0.6);
-            goalY += breatheY * (0.4 + p * 0.6);
+            // 0.5 to 1: structure → cluster → scatter (reverse)
+            const t = (dotProgress - 0.5) * 2; // 0 to 1
+            if (t < 0.5) {
+              // structure → cluster
+              const tt = t * 2;
+              goalX = dot.structuredX + (dot.clusterX - dot.structuredX) * tt;
+              goalY = dot.structuredY + (dot.clusterY - dot.structuredY) * tt;
+            } else {
+              // cluster → scatter
+              const tt = (t - 0.5) * 2;
+              goalX = dot.clusterX + (dot.scatterX - dot.clusterX) * tt;
+              goalY = dot.clusterY + (dot.scatterY - dot.clusterY) * tt;
+            }
           }
+
+          // Add drift - varies with structure level (less drift when structured)
+          const structureAmount = 1 - Math.abs(dotProgress - 0.5) * 2; // peaks at 0.5
+          const driftAmount = 1 - structureAmount * 0.7;
+          goalX += drift * driftAmount;
+          goalY += driftY * driftAmount;
 
           dot.x = goalX;
           dot.y = goalY;
@@ -1089,23 +1061,14 @@
       }
 
       function draw() {
-        const state = getAnimationState(animationTime);
+        const progress = getProgress(animationTime);
 
         ctx.clearRect(0, 0, width, height);
 
-        // Edge opacity based on phase
-        let edgeOpacity = 0;
-
-        if (state.phase === 'emergence') {
-          // Edges fade in during second half of emergence
-          edgeOpacity = Math.max(0, (state.progress - 0.4) * 0.5);
-        } else if (state.phase === 'mesh') {
-          // Full visibility during mesh phase
-          edgeOpacity = 0.3;
-        } else {
-          // Gentle fade out during dissolution
-          edgeOpacity = 0.3 * (1 - state.progress * 0.9);
-        }
+        // Edge opacity: fades in as we approach structure, fades out as we leave
+        // Peaks when progress is around 0.5 (most structured)
+        const structureAmount = 1 - Math.abs(progress - 0.5) * 2;
+        const edgeOpacity = structureAmount * 0.3;
 
         // Draw edges
         if (edgeOpacity > 0.01) {
