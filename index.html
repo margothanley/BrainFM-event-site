@@ -797,36 +797,28 @@
 
       // ============ CONFIGURATION ============
       const CONFIG = {
-        dotCount: 60,
-        dotMinRadius: 2.5,
-        dotMaxRadius: 5,
+        dotCount: 55,
+        dotMinRadius: 2,
+        dotMaxRadius: 4.5,
 
-        // Colors
+        // Colors (slightly more subtle)
         colors: {
-          primary: 'rgba(121, 191, 208, 0.8)',
-          secondary: 'rgba(142, 200, 215, 0.7)',
-          tertiary: 'rgba(168, 213, 226, 0.6)',
-          line: 'rgba(121, 191, 208, 0.2)'
+          primary: 'rgba(121, 191, 208, 0.7)',
+          secondary: 'rgba(142, 200, 215, 0.6)',
+          tertiary: 'rgba(168, 213, 226, 0.5)',
+          line: 'rgba(121, 191, 208, 0.15)'
         },
 
         // Network
         maxEdgesPerNode: 2,
-        edgeDistance: 70,
-        lineWidth: 1,
+        edgeDistance: 65,
+        lineWidth: 0.8,
 
-        // Timing (slower, more fluid)
-        timing: {
-          scatter: 3,
-          swirl: 6,
-          structure: 5,
-          rest: 4,
-          dissolve: 4,
-          total: 22
-        },
+        // Single continuous loop duration (seconds)
+        loopDuration: 30,
 
-        // Physics (much smoother)
-        smoothing: 0.03,  // Lower = smoother/slower
-        dampening: 0.92
+        // Smoothing for fluid motion
+        smoothing: 0.015  // Very smooth interpolation
       };
 
       const canvas = document.getElementById('heroCanvas');
@@ -842,8 +834,6 @@
       let animationTime = 0;
       let lastTimestamp = 0;
       let clusterCenters = [];
-
-      // Safe zone: don't draw here (where text is)
       let safeZoneWidth = 0;
 
       function resize() {
@@ -857,20 +847,22 @@
         canvas.style.height = height + 'px';
         ctx.scale(dpr, dpr);
 
-        // Safe zone = left 55% of canvas (where hero text is)
+        // Safe zone = left 55% (where hero text is)
         safeZoneWidth = width * 0.55;
 
-        // Animation zone = right 45% of canvas
+        // Animation zone = right 45%
         const animZoneStart = safeZoneWidth;
         const animZoneWidth = width - safeZoneWidth;
         const vertPadding = height * 0.1;
 
-        // Cluster centers in animation zone only
+        // Cluster centers form a network structure
         clusterCenters = [
-          { x: animZoneStart + animZoneWidth * 0.25, y: vertPadding + height * 0.2 },
-          { x: animZoneStart + animZoneWidth * 0.55, y: vertPadding + height * 0.35 },
-          { x: animZoneStart + animZoneWidth * 0.35, y: vertPadding + height * 0.55 },
-          { x: animZoneStart + animZoneWidth * 0.65, y: vertPadding + height * 0.7 }
+          { x: animZoneStart + animZoneWidth * 0.3, y: vertPadding + height * 0.2 },
+          { x: animZoneStart + animZoneWidth * 0.6, y: vertPadding + height * 0.25 },
+          { x: animZoneStart + animZoneWidth * 0.2, y: vertPadding + height * 0.45 },
+          { x: animZoneStart + animZoneWidth * 0.5, y: vertPadding + height * 0.5 },
+          { x: animZoneStart + animZoneWidth * 0.35, y: vertPadding + height * 0.7 },
+          { x: animZoneStart + animZoneWidth * 0.65, y: vertPadding + height * 0.65 }
         ];
       }
 
@@ -882,30 +874,36 @@
           const clusterIndex = Math.floor(Math.random() * clusterCenters.length);
           const cluster = clusterCenters[clusterIndex];
 
-          // Scatter position: RIGHT side only (in animation zone)
-          const scatterX = safeZoneWidth + Math.random() * (width - safeZoneWidth - 20);
-          const scatterY = Math.random() * height * 0.8 + height * 0.1;
+          // Scattered position (random across animation zone)
+          const scatterX = safeZoneWidth + 20 + Math.random() * (width - safeZoneWidth - 40);
+          const scatterY = height * 0.1 + Math.random() * height * 0.8;
 
-          // Target position: near cluster
-          const targetX = cluster.x + (Math.random() - 0.5) * 50;
-          const targetY = cluster.y + (Math.random() - 0.5) * 40;
+          // Clustered position (near assigned cluster)
+          const clusterX = cluster.x + (Math.random() - 0.5) * 40;
+          const clusterY = cluster.y + (Math.random() - 0.5) * 35;
+
+          // Structured position (tighter, more organized)
+          const structuredX = cluster.x + (Math.random() - 0.5) * 25;
+          const structuredY = cluster.y + (Math.random() - 0.5) * 20;
 
           const colorType = colorTypes[Math.floor(Math.random() * colorTypes.length)];
 
           dots.push({
             x: scatterX,
             y: scatterY,
-            vx: 0,
-            vy: 0,
             scatterX,
             scatterY,
-            targetX,
-            targetY,
+            clusterX,
+            clusterY,
+            structuredX,
+            structuredY,
             radius: CONFIG.dotMinRadius + Math.random() * (CONFIG.dotMaxRadius - CONFIG.dotMinRadius),
             color: CONFIG.colors[colorType],
             cluster: clusterIndex,
-            phase: Math.random() * Math.PI * 2,
-            speed: 0.15 + Math.random() * 0.15  // Slower base speed
+            // Each dot has slightly different timing for organic feel
+            phaseOffset: Math.random() * 0.15,
+            driftPhase: Math.random() * Math.PI * 2,
+            driftSpeed: 0.3 + Math.random() * 0.2
           });
         }
       }
@@ -919,8 +917,8 @@
           for (let j = 0; j < dots.length; j++) {
             if (i === j) continue;
             const other = dots[j];
-            const dx = dot.targetX - other.targetX;
-            const dy = dot.targetY - other.targetY;
+            const dx = dot.structuredX - other.structuredX;
+            const dy = dot.structuredY - other.structuredY;
             const dist = Math.sqrt(dx * dx + dy * dy);
 
             if (dist < CONFIG.edgeDistance) {
@@ -940,93 +938,70 @@
         }
       }
 
-      // Smooth easing
-      function easeInOutSine(t) {
-        return -(Math.cos(Math.PI * t) - 1) / 2;
+      // Smooth sine easing for continuous flow
+      function smoothstep(t) {
+        return t * t * (3 - 2 * t);
       }
 
-      function getPhase(time) {
-        const t = CONFIG.timing;
-        const loopTime = time % t.total;
+      // Get continuous progress (0 to 1 and back, no stopping)
+      function getContinuousProgress(time) {
+        const loopTime = time % CONFIG.loopDuration;
+        const halfLoop = CONFIG.loopDuration / 2;
 
-        if (loopTime < t.scatter) {
-          return { phase: 'scatter', progress: loopTime / t.scatter };
-        } else if (loopTime < t.scatter + t.swirl) {
-          return { phase: 'swirl', progress: (loopTime - t.scatter) / t.swirl };
-        } else if (loopTime < t.scatter + t.swirl + t.structure) {
-          return { phase: 'structure', progress: (loopTime - t.scatter - t.swirl) / t.structure };
-        } else if (loopTime < t.scatter + t.swirl + t.structure + t.rest) {
-          return { phase: 'rest', progress: 1 };
+        if (loopTime < halfLoop) {
+          // First half: scattered → structured (0 → 1)
+          return smoothstep(loopTime / halfLoop);
         } else {
-          return { phase: 'dissolve', progress: (loopTime - t.scatter - t.swirl - t.structure - t.rest) / t.dissolve };
+          // Second half: structured → scattered (1 → 0)
+          return smoothstep(1 - (loopTime - halfLoop) / halfLoop);
         }
       }
 
-      function updateDots(phaseInfo) {
-        const { phase, progress } = phaseInfo;
+      function updateDots() {
+        const progress = getContinuousProgress(animationTime);
 
         dots.forEach(dot => {
+          // Individual timing offset for organic feel
+          const dotProgress = getContinuousProgress(animationTime + dot.phaseOffset * CONFIG.loopDuration);
+
+          // Subtle ambient drift (always present, very gentle)
+          const drift = Math.sin(animationTime * dot.driftSpeed + dot.driftPhase) * 2;
+          const driftY = Math.cos(animationTime * dot.driftSpeed * 0.8 + dot.driftPhase) * 2;
+
+          // Three-stage interpolation: scatter → cluster → structure
           let goalX, goalY;
 
-          // Very gentle ambient drift (always applied)
-          const drift = Math.sin(animationTime * 0.1 + dot.phase) * 3;
-          const driftY = Math.cos(animationTime * 0.08 + dot.phase) * 3;
-
-          if (phase === 'scatter') {
-            // Gentle float in scattered positions
-            goalX = dot.scatterX + Math.sin(animationTime * dot.speed + dot.phase) * 8 + drift;
-            goalY = dot.scatterY + Math.cos(animationTime * dot.speed * 0.8 + dot.phase) * 8 + driftY;
-
-          } else if (phase === 'swirl') {
-            // Smoothly interpolate toward target with gentle spiral
-            const t = easeInOutSine(progress);
-            const spiralAngle = animationTime * 0.2 + dot.phase;
-            const spiralRadius = 20 * (1 - t);
-
-            goalX = dot.scatterX + (dot.targetX - dot.scatterX) * t + Math.cos(spiralAngle) * spiralRadius;
-            goalY = dot.scatterY + (dot.targetY - dot.scatterY) * t + Math.sin(spiralAngle) * spiralRadius;
-
-          } else if (phase === 'structure') {
-            // Settle with decreasing movement
-            const t = easeInOutSine(progress);
-            const settle = 1 - t * 0.8;
-            goalX = dot.targetX + drift * settle;
-            goalY = dot.targetY + driftY * settle;
-
-          } else if (phase === 'rest') {
-            // Very subtle breathing
-            goalX = dot.targetX + Math.sin(animationTime * 0.15 + dot.phase) * 2;
-            goalY = dot.targetY + Math.cos(animationTime * 0.12 + dot.phase) * 2;
-
-          } else if (phase === 'dissolve') {
-            // Gently drift back to scattered
-            const t = easeInOutSine(progress);
-            goalX = dot.targetX + (dot.scatterX - dot.targetX) * t + drift * t;
-            goalY = dot.targetY + (dot.scatterY - dot.targetY) * t + driftY * t;
+          if (dotProgress < 0.5) {
+            // Scatter to cluster (0 to 0.5 → 0 to 1)
+            const t = dotProgress * 2;
+            goalX = dot.scatterX + (dot.clusterX - dot.scatterX) * t;
+            goalY = dot.scatterY + (dot.clusterY - dot.scatterY) * t;
+          } else {
+            // Cluster to structure (0.5 to 1 → 0 to 1)
+            const t = (dotProgress - 0.5) * 2;
+            goalX = dot.clusterX + (dot.structuredX - dot.clusterX) * t;
+            goalY = dot.clusterY + (dot.structuredY - dot.clusterY) * t;
           }
 
-          // Very smooth interpolation (key to fluid motion)
+          // Add drift (decreases as dots become more structured)
+          const driftAmount = 1 - dotProgress * 0.7;
+          goalX += drift * driftAmount;
+          goalY += driftY * driftAmount;
+
+          // Smooth interpolation toward goal
           dot.x += (goalX - dot.x) * CONFIG.smoothing;
           dot.y += (goalY - dot.y) * CONFIG.smoothing;
         });
       }
 
-      function draw(phaseInfo) {
-        const { phase, progress } = phaseInfo;
+      function draw() {
+        const progress = getContinuousProgress(animationTime);
 
         ctx.clearRect(0, 0, width, height);
 
-        // Edge opacity
-        let edgeOpacity = 0;
-        if (phase === 'swirl' && progress > 0.6) {
-          edgeOpacity = (progress - 0.6) * 2.5 * 0.25;
-        } else if (phase === 'structure') {
-          edgeOpacity = 0.25 + easeInOutSine(progress) * 0.1;
-        } else if (phase === 'rest') {
-          edgeOpacity = 0.35;
-        } else if (phase === 'dissolve') {
-          edgeOpacity = 0.35 * (1 - easeInOutSine(progress));
-        }
+        // Edges fade in smoothly as dots cluster and structure
+        // Start appearing at progress 0.3, full at 0.7
+        const edgeOpacity = Math.max(0, Math.min(0.25, (progress - 0.3) * 0.625));
 
         // Draw edges
         if (edgeOpacity > 0.01) {
@@ -1061,9 +1036,8 @@
 
         animationTime += deltaTime;
 
-        const phaseInfo = getPhase(animationTime);
-        updateDots(phaseInfo);
-        draw(phaseInfo);
+        updateDots();
+        draw();
 
         requestAnimationFrame(animate);
       }
