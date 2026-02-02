@@ -61,42 +61,48 @@
 
     /* Navigation */
     nav {
-      padding: 40px 0 60px 0;
+      padding: 40px 0 24px 0;
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       max-width: var(--content-width);
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 60px;
     }
 
     .nav-brand {
       font-family: var(--font-sans);
       font-size: 14px;
+      letter-spacing: 0.03em;
       color: var(--text-muted);
       text-decoration: none;
+      transition: color 0.2s ease;
     }
 
     .nav-brand:hover {
-      color: var(--text-primary);
+      color: var(--accent);
     }
 
     .nav-links {
       font-family: var(--font-sans);
       font-size: 14px;
+      letter-spacing: 0.03em;
       color: var(--text-muted);
     }
 
     .nav-links a {
       color: inherit;
       text-decoration: none;
+      transition: color 0.2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--text-primary);
+      color: var(--accent);
     }
 
     /* Hero */
     .hero {
-      padding-bottom: 80px;
+      padding-bottom: 60px;
     }
 
     .hero-title {
@@ -125,7 +131,12 @@
       font-weight: 600;
       letter-spacing: 0.02em;
       color: var(--text-primary);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero-date .small-caps {
+      font-variant: small-caps;
+      text-transform: lowercase;
     }
 
     .hero-description {
@@ -137,15 +148,15 @@
 
     /* Separator */
     .separator {
-      padding: 70px 0;
-      color: var(--divider);
-      font-size: 18px;
-      letter-spacing: 0.5em;
+      padding: 60px 0;
+      color: var(--accent);
+      font-size: 20px;
+      letter-spacing: 0.6em;
     }
 
     /* Quote */
     .quote {
-      padding-bottom: 120px;
+      padding-bottom: 140px;
     }
 
     .quote blockquote {
@@ -155,11 +166,14 @@
       line-height: 1.6;
       color: var(--text-muted);
       max-width: 560px;
+      border-left: 2px solid var(--accent);
+      padding-left: 24px;
     }
 
     .quote cite {
       display: block;
       margin-top: 16px;
+      padding-left: 24px;
       font-family: var(--font-sans);
       font-style: normal;
       font-size: 14px;
@@ -168,7 +182,7 @@
 
     /* Sections */
     section {
-      padding-bottom: 120px;
+      padding-bottom: 140px;
     }
 
     .section-header {
@@ -176,7 +190,13 @@
       font-size: 1.125rem;
       font-weight: 400;
       color: var(--text-primary);
-      margin-bottom: 32px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .section-content {
+      padding-top: 32px;
     }
 
     /* About */
@@ -193,13 +213,18 @@
     .program-list {
       display: flex;
       flex-direction: column;
-      gap: 28px;
     }
 
     .program-item {
       display: grid;
       grid-template-columns: 56px 1fr;
       gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .program-item:first-child {
+      padding-top: 0;
     }
 
     .program-time {
@@ -230,28 +255,32 @@
     }
 
     .program-note {
-      margin-top: 40px;
+      margin-top: 32px;
       font-size: 15px;
       color: var(--text-muted);
       font-style: italic;
     }
 
     /* Hosts */
-    .hosts p {
+    .hosts-content {
+      padding-top: 32px;
+    }
+
+    .hosts-content p {
       font-size: 17px;
       color: var(--text-primary);
       margin-bottom: 8px;
     }
 
-    .hosts a {
-      color: inherit;
-      text-decoration: underline;
-      text-decoration-color: var(--divider);
-      text-underline-offset: 3px;
+    .hosts-content a {
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
     }
 
-    .hosts a:hover {
-      text-decoration-color: var(--text-primary);
+    .hosts-content a:hover {
+      color: var(--accent);
+      text-decoration: underline;
     }
 
     /* Contact */
@@ -260,13 +289,19 @@
       font-size: 1.25rem;
       font-weight: 400;
       color: var(--text-primary);
-      margin-bottom: 32px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .contact-content {
+      padding-top: 32px;
     }
 
     .contact-form {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 28px;
       max-width: 400px;
     }
 
@@ -292,9 +327,10 @@
     .form-group textarea {
       font-family: var(--font-sans);
       font-size: 16px;
-      padding: 12px 14px;
-      border: 1px solid var(--divider);
-      border-radius: 4px;
+      padding: 12px 0;
+      border: none;
+      border-bottom: 1px solid var(--divider);
+      border-radius: 0;
       background: transparent;
       color: var(--text-primary);
       transition: border-color 0.2s ease;
@@ -303,18 +339,18 @@
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
-      border-color: var(--text-muted);
+      border-bottom-color: var(--accent);
     }
 
     .form-group textarea {
       resize: vertical;
-      min-height: 100px;
+      min-height: 80px;
     }
 
     .form-group input::placeholder,
     .form-group textarea::placeholder {
       color: var(--text-muted);
-      opacity: 0.7;
+      opacity: 0.6;
     }
 
     .submit-btn {
@@ -326,14 +362,15 @@
       background: transparent;
       border: 1px solid var(--text-primary);
       padding: 12px 28px;
-      border-radius: 4px;
+      border-radius: 0;
       cursor: pointer;
-      transition: background-color 0.2s ease, color 0.2s ease;
+      transition: border-color 0.2s ease, color 0.2s ease;
+      margin-top: 8px;
     }
 
     .submit-btn:hover {
-      background: var(--text-primary);
-      color: var(--background);
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     .contact-email {
@@ -344,19 +381,37 @@
 
     .contact-email a {
       color: var(--text-primary);
-      text-decoration: underline;
-      text-decoration-color: var(--divider);
-      text-underline-offset: 3px;
+      text-decoration: none;
+      transition: color 0.2s ease;
     }
 
     .contact-email a:hover {
-      text-decoration-color: var(--text-primary);
+      color: var(--accent);
+      text-decoration: underline;
     }
 
     /* Footer */
     footer {
-      padding: 60px 0;
+      padding: 80px 0 60px 0;
       border-top: 1px solid var(--divider);
+      position: relative;
+    }
+
+    .footer-constellation {
+      position: absolute;
+      top: 30px;
+      right: 0;
+      width: 80px;
+      height: 60px;
+    }
+
+    .footer-constellation circle {
+      fill: var(--accent);
+    }
+
+    .footer-constellation line {
+      stroke: var(--divider);
+      stroke-width: 0.5;
     }
 
     footer p {
@@ -381,7 +436,8 @@
       nav {
         flex-direction: column;
         gap: 16px;
-        padding: 32px 0 48px 0;
+        padding: 32px 0 20px 0;
+        margin-bottom: 48px;
       }
 
       .hero-title {
@@ -391,10 +447,11 @@
       .program-item {
         grid-template-columns: 48px 1fr;
         gap: 16px;
+        padding: 20px 0;
       }
 
       section {
-        padding-bottom: 80px;
+        padding-bottom: 100px;
       }
 
       .separator {
@@ -402,7 +459,11 @@
       }
 
       .quote {
-        padding-bottom: 80px;
+        padding-bottom: 100px;
+      }
+
+      .footer-constellation {
+        display: none;
       }
     }
 
@@ -422,6 +483,10 @@
 
       .program-time {
         font-size: 14px;
+      }
+
+      section {
+        padding-bottom: 80px;
       }
     }
   </style>
@@ -445,7 +510,7 @@
         <section class="hero">
           <h1 class="hero-title">Foundation Models<br>for the Brain</h1>
           <p class="hero-subtitle">Laying the groundwork for the next stage in neurotech and AI</p>
-          <p class="hero-date">March 26, 2026 · 5–9 PM · New York City</p>
+          <p class="hero-date">March 26, 2026 · 5–9 <span class="small-caps">PM</span> · New York City</p>
           <p class="hero-description">An invite-only evening for researchers working on brain foundation models—across hardware, data, and real-world systems.</p>
         </section>
 
@@ -469,74 +534,96 @@
         <!-- Program -->
         <section id="program">
           <h2 class="section-header">Program</h2>
-          <div class="program-list">
-            <div class="program-item">
-              <span class="program-time">5:00</span>
-              <div class="program-content">
-                <p class="program-title">Welcome and drinks</p>
+          <div class="section-content">
+            <div class="program-list">
+              <div class="program-item">
+                <span class="program-time">5:00</span>
+                <div class="program-content">
+                  <p class="program-title">Welcome and drinks</p>
+                </div>
+              </div>
+              <div class="program-item">
+                <span class="program-time">5:30</span>
+                <div class="program-content">
+                  <p class="program-title">Panel 1 — Building a High-Quality Brain Foundation Model</p>
+                  <p class="program-description">Constraints, workaround strategies, and what the field still needs to figure out.</p>
+                </div>
+              </div>
+              <div class="program-item">
+                <span class="program-time">6:30</span>
+                <div class="program-content">
+                  <p class="program-title">Panel 2 — From Research to Deployment</p>
+                  <p class="program-description">Validation, integration, and near-term value across clinical, invasive, and consumer paths.</p>
+                </div>
+              </div>
+              <div class="program-item">
+                <span class="program-time">7:30</span>
+                <div class="program-content">
+                  <p class="program-title">Keynote</p>
+                </div>
+              </div>
+              <div class="program-item">
+                <span class="program-time">8:00</span>
+                <div class="program-content">
+                  <p class="program-title">Reception and informal discussion</p>
+                </div>
               </div>
             </div>
-            <div class="program-item">
-              <span class="program-time">5:30</span>
-              <div class="program-content">
-                <p class="program-title">Panel 1 — Building a High-Quality Brain Foundation Model</p>
-                <p class="program-description">Constraints, workaround strategies, and what the field still needs to figure out.</p>
-              </div>
-            </div>
-            <div class="program-item">
-              <span class="program-time">6:30</span>
-              <div class="program-content">
-                <p class="program-title">Panel 2 — From Research to Deployment</p>
-                <p class="program-description">Validation, integration, and near-term value across clinical, invasive, and consumer paths.</p>
-              </div>
-            </div>
-            <div class="program-item">
-              <span class="program-time">7:30</span>
-              <div class="program-content">
-                <p class="program-title">Keynote</p>
-              </div>
-            </div>
-            <div class="program-item">
-              <span class="program-time">8:00</span>
-              <div class="program-content">
-                <p class="program-title">Reception and informal discussion</p>
-              </div>
-            </div>
+            <p class="program-note">Panelists to be announced</p>
           </div>
-          <p class="program-note">Panelists to be announced</p>
         </section>
 
         <!-- Hosts -->
         <section class="hosts" id="hosts">
           <h2 class="section-header">Hosts & Venue</h2>
-          <p>Convened by <a href="https://e184.org" target="_blank" rel="noopener">E184</a> and <a href="https://neuronyc.org" target="_blank" rel="noopener">NeuroNYC</a></p>
-          <p>Hosted at Brown Rudnick, New York</p>
+          <div class="hosts-content">
+            <p>Convened by <a href="https://e184.org" target="_blank" rel="noopener">E184</a> and <a href="https://neuronyc.org" target="_blank" rel="noopener">NeuroNYC</a></p>
+            <p>Hosted at Brown Rudnick, New York</p>
+          </div>
         </section>
 
         <!-- Contact -->
         <section id="contact">
           <h2 class="contact-header">Interested in attending?</h2>
-          <form class="contact-form" action="https://formspree.io/f/placeholder" method="POST">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-              <label for="affiliation">Affiliation</label>
-              <input type="text" id="affiliation" name="affiliation" required>
-            </div>
-            <div class="form-group">
-              <label for="note">Note <span class="optional">(optional)</span></label>
-              <textarea id="note" name="note" placeholder="Brief context on your work or interest"></textarea>
-            </div>
-            <button type="submit" class="submit-btn">Submit</button>
-          </form>
-          <p class="contact-email">For other questions, reach out to Margot Hanley at <a href="mailto:margothanley@gmail.com">margothanley@gmail.com</a></p>
+          <div class="contact-content">
+            <form class="contact-form" action="https://formspree.io/f/placeholder" method="POST">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="affiliation">Affiliation</label>
+                <input type="text" id="affiliation" name="affiliation" required>
+              </div>
+              <div class="form-group">
+                <label for="note">Note <span class="optional">(optional)</span></label>
+                <textarea id="note" name="note" placeholder="Brief context on your work or interest"></textarea>
+              </div>
+              <button type="submit" class="submit-btn">Submit</button>
+            </form>
+            <p class="contact-email">For other questions, reach out to Margot Hanley at <a href="mailto:margothanley@gmail.com">margothanley@gmail.com</a></p>
+          </div>
         </section>
       </main>
 
       <!-- Footer -->
       <footer>
+        <svg class="footer-constellation" viewBox="0 0 80 60" aria-hidden="true">
+          <!-- Constellation lines -->
+          <line x1="12" y1="15" x2="35" y2="8"/>
+          <line x1="35" y1="8" x2="55" y2="20"/>
+          <line x1="35" y1="8" x2="28" y2="35"/>
+          <line x1="28" y1="35" x2="55" y2="20"/>
+          <line x1="28" y1="35" x2="60" y2="45"/>
+          <line x1="55" y1="20" x2="60" y2="45"/>
+          <!-- Constellation nodes -->
+          <circle cx="12" cy="15" r="2.5"/>
+          <circle cx="35" cy="8" r="3"/>
+          <circle cx="55" cy="20" r="2.5"/>
+          <circle cx="28" cy="35" r="2.5"/>
+          <circle cx="60" cy="45" r="3"/>
+          <circle cx="70" cy="28" r="2"/>
+        </svg>
         <p>Foundation Models for the Brain · March 26, 2026 · New York City</p>
       </footer>
 
