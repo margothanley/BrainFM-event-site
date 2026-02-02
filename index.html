@@ -238,17 +238,19 @@
     .epigraph {
       border-left: 3px solid var(--accent);
       padding-left: 20px;
+      padding-bottom: 32px;
       margin: 0 0 40px;
       max-width: 580px;
+      border-bottom: 1px solid var(--rule);
     }
 
     .epigraph blockquote {
       font-family: var(--font-sans);
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 400;
       font-style: normal;
-      line-height: 1.5;
-      color: var(--muted);
+      line-height: 1.55;
+      color: var(--accent);
       margin: 0 0 10px;
     }
 
@@ -258,6 +260,30 @@
       font-size: 14px;
       font-style: normal;
       color: var(--quiet);
+    }
+
+    /* ========== EVENT DETAILS ========== */
+    .event-details {
+      max-width: 640px;
+      margin-bottom: 36px;
+      padding: 20px 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .event-details p {
+      font-size: var(--small);
+      color: var(--muted);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .event-details p:last-child {
+      margin-bottom: 0;
+    }
+
+    .event-details strong {
+      color: var(--quiet);
+      font-weight: 500;
     }
 
     /* ========== PURPOSE CONTENT ========== */
@@ -487,6 +513,35 @@
       border-bottom-color: var(--accent);
     }
 
+    .invite-cta {
+      max-width: 500px;
+      margin-bottom: 32px;
+    }
+
+    .invite-desc {
+      font-size: var(--body);
+      color: var(--muted);
+      margin-bottom: 20px;
+      line-height: var(--lh-body);
+    }
+
+    .invite-btn {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 4px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .invite-btn:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
     .contact-email {
       font-size: var(--small);
       color: var(--muted);
@@ -651,36 +706,37 @@
           <cite>— Norbert Wiener, 1948</cite>
         </div>
 
-        <h2 class="section-title">Purpose of the event</h2>
+        <!-- Event Details Block -->
+        <div class="event-details">
+          <p><strong>Date:</strong> March 26, 2026</p>
+          <p><strong>Time:</strong> 5:00–9:00 PM</p>
+          <p><strong>Location:</strong> Brown Rudnick, New York City</p>
+          <p><strong>Attendees:</strong> ~50 invited researchers and practitioners</p>
+          <p><strong>Format:</strong> Private, invite-only evening convening</p>
+        </div>
+
+        <h2 class="section-title">Overview and goals</h2>
 
         <div class="purpose-content">
-          <p>Brain foundation models are advancing quickly, but the field is still working through basic constraints: what kinds of data are realistically available, what today's sensors can and can't capture, and what "progress" should mean in practice. Across the field, teams are pursuing different strategies—pushing existing sensors further, leaning on multimodal inputs, drawing on non-human data, building models around specific settings, or prioritizing near-term deployment.</p>
+          <p>Brain foundation models are moving fast, but the field is constrained by very practical questions: what neural data is realistically available, what today's sensing can and can't capture, where the true bottlenecks are, and where the next improvements need to come from (hardware? data access and scale? data quality? objectives? evaluation? deployment pathways?).</p>
 
-          <p>This invite-only evening brings together an interdisciplinary group of researchers and practitioners to share what's working, what isn't, and what "working" should even mean—given constraints in neural data, sensing, and deployment. The format: two panels, short provocations, and substantial time for discussion.</p>
+          <p>This invite-only evening convenes a cross-cutting group of research practitioners across neural sensing, recording, modeling, and adjacent technical fields—bringing together approaches and communities that don't often share the same room. The goal is to create a space where people can share how they're navigating these trade-offs in practice: comparing assumptions, surfacing productive disagreement, and clarifying what seems to be working right now (and what isn't).</p>
         </div>
 
         <div class="questions">
-          <p class="questions-intro">Questions we'll explore:</p>
+          <p class="questions-intro">Themes we'll return to:</p>
           <ul class="questions-list">
             <li>
-              <p class="q">Where is the bottleneck right now?</p>
-              <p class="context">Is progress primarily constrained by sensors, data access, or modeling assumptions?</p>
+              <p class="q">Where progress is constrained in practice</p>
+              <p class="context">Sensing limits, data collection paradigms, access and scale, modeling assumptions, and validation</p>
             </li>
             <li>
-              <p class="q">Which workarounds seem most promising—and why?</p>
-              <p class="context">What strategies meaningfully move the needle under current constraints?</p>
+              <p class="q">What "foundation" means in this domain</p>
+              <p class="context">Which kinds of generalization matter (across individuals, tasks, regions, modalities, or settings), and which seem feasible today</p>
             </li>
             <li>
-              <p class="q">What counts as "enough" data (and of what kind)?</p>
-              <p class="context">When does scale help, and when are there hard limits?</p>
-            </li>
-            <li>
-              <p class="q">What does "working" mean in this space?</p>
-              <p class="context">Which outcomes or applications feel real today, and which remain aspirational?</p>
-            </li>
-            <li>
-              <p class="q">How do research and real-world systems inform one another?</p>
-              <p class="context">What can we learn from early deployments, and what gets lost in translation?</p>
+              <p class="q">What changes in real systems</p>
+              <p class="context">What we learn as models meet deployment, and how "working" gets defined once systems touch reality</p>
             </li>
           </ul>
         </div>
@@ -703,15 +759,15 @@
           <div class="program-item">
             <span class="program-time">5:30</span>
             <div>
-              <p class="program-title">Panel 1 — Building a high-quality brain foundation model</p>
-              <p class="program-desc">Constraints, workaround strategies, and what the field still needs to figure out.</p>
+              <p class="program-title">Panel 1 — Original approaches and where progress is bottlenecked</p>
+              <p class="program-desc">A conversation about different strategies currently being pursued across sensing, data, and modeling—and what those approaches suggest about where progress is actually constrained today.</p>
             </div>
           </div>
           <div class="program-item">
             <span class="program-time">6:30</span>
             <div>
-              <p class="program-title">Panel 2 — From research to deployment</p>
-              <p class="program-desc">Validation, integration, and near-term value across clinical, invasive, and consumer paths.</p>
+              <p class="program-title">Panel 2 — From research to real-world systems</p>
+              <p class="program-desc">A discussion of what changes when models move toward deployment: validation, integration, and near-term value across clinical, invasive, and consumer paths—and how "working" gets defined once systems interact with reality.</p>
             </div>
           </div>
           <div class="program-item">
@@ -757,25 +813,10 @@
       <section id="contact">
         <h2 class="section-title">Request an invite</h2>
 
-        <form class="contact-form" action="https://formspree.io/f/placeholder" method="POST">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="affiliation">Affiliation</label>
-            <input type="text" id="affiliation" name="affiliation" required>
-          </div>
-          <div class="form-group">
-            <label for="note">Note <span class="optional">(optional)</span></label>
-            <textarea id="note" name="note" placeholder="Brief context on your work or interest"></textarea>
-          </div>
-          <button type="submit" class="submit-btn">Submit request →</button>
-        </form>
+        <div class="invite-cta">
+          <p class="invite-desc">This is an invite-only event for researchers and practitioners working on brain foundation models.</p>
+          <a href="https://forms.gle/YOUR_FORM_ID_HERE" target="_blank" rel="noopener" class="invite-btn">Request an invite →</a>
+        </div>
 
         <p class="contact-email">For other questions, reach out to <a href="mailto:margothanley@gmail.com">margothanley@gmail.com</a></p>
       </section>
@@ -814,11 +855,11 @@
         edgeDistance: 65,
         lineWidth: 0.8,
 
-        // Single continuous loop duration (seconds)
-        loopDuration: 30,
+        // Single continuous loop duration (seconds) - 12s is fast enough to see evolving
+        loopDuration: 12,
 
-        // Smoothing for fluid motion
-        smoothing: 0.015  // Very smooth interpolation
+        // Smoothing for fluid motion (slightly higher = faster response)
+        smoothing: 0.025
       };
 
       const canvas = document.getElementById('heroCanvas');
