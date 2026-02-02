@@ -199,7 +199,7 @@
       position: relative;
       height: 1px;
       background: var(--rule);
-      margin: 60px 0;
+      margin: 40px 0;
     }
 
     .section-divider::after {
@@ -238,8 +238,8 @@
     .epigraph {
       border-left: 3px solid var(--accent);
       padding-left: 20px;
-      padding-bottom: 32px;
-      margin: 0 0 40px;
+      padding-bottom: 28px;
+      margin: 0 0 48px;
       max-width: 580px;
       border-bottom: 1px solid var(--rule);
     }
@@ -632,7 +632,7 @@
       }
 
       .hero-visual {
-        opacity: 0.4;
+        opacity: 0.7;
       }
 
       .section-divider {
@@ -658,7 +658,7 @@
       }
 
       .hero-visual {
-        opacity: 0.3;
+        opacity: 0.6;
       }
 
       .program-item {
@@ -846,27 +846,24 @@
       // ============ CONFIGURATION ============
       const CONFIG = {
         dotCount: 55,
-        dotMinRadius: 2,
-        dotMaxRadius: 4.5,
+        dotMinRadius: 2.5,
+        dotMaxRadius: 5,
 
-        // Colors (slightly more subtle)
+        // Colors
         colors: {
-          primary: 'rgba(121, 191, 208, 0.7)',
-          secondary: 'rgba(142, 200, 215, 0.6)',
-          tertiary: 'rgba(168, 213, 226, 0.5)',
-          line: 'rgba(121, 191, 208, 0.15)'
+          primary: 'rgba(121, 191, 208, 0.75)',
+          secondary: 'rgba(142, 200, 215, 0.65)',
+          tertiary: 'rgba(168, 213, 226, 0.55)',
+          line: 'rgba(121, 191, 208, 0.18)'
         },
 
         // Network
         maxEdgesPerNode: 2,
-        edgeDistance: 65,
-        lineWidth: 0.8,
+        edgeDistance: 70,
+        lineWidth: 1,
 
-        // Single continuous loop duration (seconds) - 12s is fast enough to see evolving
-        loopDuration: 12,
-
-        // Smoothing for fluid motion (slightly higher = faster response)
-        smoothing: 0.025
+        // Loop duration (seconds) - 8s full cycle so movement is noticeable
+        loopDuration: 8
       };
 
       const canvas = document.getElementById('heroCanvas');
@@ -992,64 +989,54 @@
         }
       }
 
-      // Smooth sine easing for continuous flow
-      function smoothstep(t) {
-        return t * t * (3 - 2 * t);
-      }
-
-      // Get continuous progress (0 to 1 and back, no stopping)
-      function getContinuousProgress(time) {
-        const loopTime = time % CONFIG.loopDuration;
-        const halfLoop = CONFIG.loopDuration / 2;
-
-        if (loopTime < halfLoop) {
-          // First half: scattered → structured (0 → 1)
-          return smoothstep(loopTime / halfLoop);
-        } else {
-          // Second half: structured → scattered (1 → 0)
-          return smoothstep(1 - (loopTime - halfLoop) / halfLoop);
-        }
+      // Pure sine wave for perfectly smooth, continuous motion (no stalling)
+      function getProgress(time) {
+        // Sine wave: 0 → 1 → 0 → 1... perfectly smooth, no stops
+        return (Math.sin(time * (2 * Math.PI / CONFIG.loopDuration) - Math.PI / 2) + 1) / 2;
       }
 
       function updateDots() {
-        const progress = getContinuousProgress(animationTime);
-
         dots.forEach(dot => {
-          // Individual timing offset for organic feel
-          const dotProgress = getContinuousProgress(animationTime + dot.phaseOffset * CONFIG.loopDuration);
+          // Each dot has slight offset for organic feel
+          const dotTime = animationTime + dot.phaseOffset * CONFIG.loopDuration;
+          const progress = getProgress(dotTime);
 
-          // Subtle ambient drift (always present, very gentle)
-          const drift = Math.sin(animationTime * dot.driftSpeed + dot.driftPhase) * 2;
-          const driftY = Math.cos(animationTime * dot.driftSpeed * 0.8 + dot.driftPhase) * 2;
+          // Tiny ambient drift
+          const drift = Math.sin(animationTime * 0.5 + dot.driftPhase) * 1.5;
+          const driftY = Math.cos(animationTime * 0.4 + dot.driftPhase) * 1.5;
 
-          // Three-stage interpolation: scatter → cluster → structure
+          // Smooth interpolation through all three stages
           let goalX, goalY;
 
-          if (dotProgress < 0.5) {
-            // Scatter to cluster (0 to 0.5 → 0 to 1)
-            const t = dotProgress * 2;
+          if (progress < 0.33) {
+            // Scatter → Cluster
+            const t = progress / 0.33;
             goalX = dot.scatterX + (dot.clusterX - dot.scatterX) * t;
             goalY = dot.scatterY + (dot.clusterY - dot.scatterY) * t;
-          } else {
-            // Cluster to structure (0.5 to 1 → 0 to 1)
-            const t = (dotProgress - 0.5) * 2;
+          } else if (progress < 0.66) {
+            // Cluster → Structure
+            const t = (progress - 0.33) / 0.33;
             goalX = dot.clusterX + (dot.structuredX - dot.clusterX) * t;
             goalY = dot.clusterY + (dot.structuredY - dot.clusterY) * t;
+          } else {
+            // Structure (with subtle breathing)
+            goalX = dot.structuredX;
+            goalY = dot.structuredY;
           }
 
-          // Add drift (decreases as dots become more structured)
-          const driftAmount = 1 - dotProgress * 0.7;
+          // Add drift (less when structured)
+          const driftAmount = 1 - progress * 0.6;
           goalX += drift * driftAmount;
           goalY += driftY * driftAmount;
 
-          // Smooth interpolation toward goal
-          dot.x += (goalX - dot.x) * CONFIG.smoothing;
-          dot.y += (goalY - dot.y) * CONFIG.smoothing;
+          // Direct position update (no lag/smoothing that causes stalling)
+          dot.x = goalX;
+          dot.y = goalY;
         });
       }
 
       function draw() {
-        const progress = getContinuousProgress(animationTime);
+        const progress = getProgress(animationTime);
 
         ctx.clearRect(0, 0, width, height);
 
