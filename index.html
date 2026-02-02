@@ -246,11 +246,11 @@
 
     .epigraph blockquote {
       font-family: var(--font-sans);
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 400;
-      font-style: normal;
+      font-style: italic;
       line-height: 1.55;
-      color: var(--accent);
+      color: var(--muted);
       margin: 0 0 10px;
     }
 
@@ -304,9 +304,16 @@
     }
 
     .questions-intro {
-      font-size: var(--small);
-      font-weight: 500;
+      font-size: var(--body);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .questions-desc {
+      font-size: var(--body);
       color: var(--muted);
+      line-height: var(--lh-body);
       margin-bottom: 24px;
     }
 
@@ -334,7 +341,7 @@
     .questions-list .q {
       font-family: var(--font-sans);
       font-size: var(--body);
-      font-weight: 500;
+      font-weight: 400;
       color: var(--ink);
       line-height: 1.4;
       margin-bottom: 4px;
@@ -706,15 +713,6 @@
           <cite>— Norbert Wiener, 1948</cite>
         </div>
 
-        <!-- Event Details Block -->
-        <div class="event-details">
-          <p><strong>Date:</strong> March 26, 2026</p>
-          <p><strong>Time:</strong> 5:00–9:00 PM</p>
-          <p><strong>Location:</strong> Brown Rudnick, New York City</p>
-          <p><strong>Attendees:</strong> ~50 invited researchers and practitioners</p>
-          <p><strong>Format:</strong> Private, invite-only evening convening</p>
-        </div>
-
         <h2 class="section-title">Overview and goals</h2>
 
         <div class="purpose-content">
@@ -724,19 +722,28 @@
         </div>
 
         <div class="questions">
-          <p class="questions-intro">Themes we'll return to:</p>
+          <p class="questions-intro">Themes we'll return to</p>
+          <p class="questions-desc">Rather than centering on a single methodology or application area, the evening will return to a small set of shared themes that cut across current work in the field:</p>
           <ul class="questions-list">
             <li>
-              <p class="q">Where progress is constrained in practice</p>
-              <p class="context">Sensing limits, data collection paradigms, access and scale, modeling assumptions, and validation</p>
+              <p class="q">Constraints in practice</p>
+              <p class="context">What currently limits progress—sensing, data collection paradigms, access and scale, model assumptions, validation</p>
             </li>
             <li>
-              <p class="q">What "foundation" means in this domain</p>
-              <p class="context">Which kinds of generalization matter (across individuals, tasks, regions, modalities, or settings), and which seem feasible today</p>
+              <p class="q">Generalization</p>
+              <p class="context">What kinds of generalization are being targeted (across individuals, tasks, regions, modalities, or settings), and which ones appear feasible today</p>
             </li>
             <li>
-              <p class="q">What changes in real systems</p>
-              <p class="context">What we learn as models meet deployment, and how "working" gets defined once systems touch reality</p>
+              <p class="q">Different approaches to progress</p>
+              <p class="context">Contrasting strategies for moving forward under constraint, including differences in data sources, modeling choices, and experimental setups</p>
+            </li>
+            <li>
+              <p class="q">Scale</p>
+              <p class="context">When scaling data or models appears to help, and where it does not</p>
+            </li>
+            <li>
+              <p class="q">From research to systems</p>
+              <p class="context">What is being deployed or tested in real-world contexts, and what those experiences reveal about "what works"</p>
             </li>
           </ul>
         </div>
@@ -815,7 +822,7 @@
 
         <div class="invite-cta">
           <p class="invite-desc">This is an invite-only event for researchers and practitioners working on brain foundation models.</p>
-          <a href="https://forms.gle/YOUR_FORM_ID_HERE" target="_blank" rel="noopener" class="invite-btn">Request an invite →</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_CnxQetl2ePyG4je0uzG-EN9hvbnx-72q9cf4oV195M2niQ/viewform" target="_blank" rel="noopener" class="invite-btn">Request an invite →</a>
         </div>
 
         <p class="contact-email">For other questions, reach out to <a href="mailto:margothanley@gmail.com">margothanley@gmail.com</a></p>
@@ -896,14 +903,20 @@
         const animZoneWidth = width - safeZoneWidth;
         const vertPadding = height * 0.1;
 
-        // Cluster centers form a network structure
+        // Cluster centers form a grid-like structure (3x3 pattern)
         clusterCenters = [
-          { x: animZoneStart + animZoneWidth * 0.3, y: vertPadding + height * 0.2 },
-          { x: animZoneStart + animZoneWidth * 0.6, y: vertPadding + height * 0.25 },
+          // Top row
+          { x: animZoneStart + animZoneWidth * 0.2, y: vertPadding + height * 0.15 },
+          { x: animZoneStart + animZoneWidth * 0.5, y: vertPadding + height * 0.15 },
+          { x: animZoneStart + animZoneWidth * 0.8, y: vertPadding + height * 0.15 },
+          // Middle row
           { x: animZoneStart + animZoneWidth * 0.2, y: vertPadding + height * 0.45 },
-          { x: animZoneStart + animZoneWidth * 0.5, y: vertPadding + height * 0.5 },
-          { x: animZoneStart + animZoneWidth * 0.35, y: vertPadding + height * 0.7 },
-          { x: animZoneStart + animZoneWidth * 0.65, y: vertPadding + height * 0.65 }
+          { x: animZoneStart + animZoneWidth * 0.5, y: vertPadding + height * 0.45 },
+          { x: animZoneStart + animZoneWidth * 0.8, y: vertPadding + height * 0.45 },
+          // Bottom row
+          { x: animZoneStart + animZoneWidth * 0.2, y: vertPadding + height * 0.75 },
+          { x: animZoneStart + animZoneWidth * 0.5, y: vertPadding + height * 0.75 },
+          { x: animZoneStart + animZoneWidth * 0.8, y: vertPadding + height * 0.75 }
         ];
       }
 
