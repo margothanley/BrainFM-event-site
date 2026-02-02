@@ -3,199 +3,544 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Foundation Models for the Brain | E184 × NeuroNYC Research Convening</title>
+  <title>Foundation Models for the Brain</title>
+  <meta name="description" content="An invite-only research convening on brain foundation models. March 26, 2026 in New York City.">
 
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="An invite-only research convening bringing together researchers with original approaches to data, hardware, and real-world systems. March 26, 5–9 PM at Brown Rudnick, NYC.">
-  <meta name="keywords" content="NeuroAI, brain foundation models, neuroscience, AI research, research convening, NYC">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Foundation Models for the Brain | E184 × NeuroNYC">
-  <meta property="og:description" content="An invite-only research convening bringing together researchers with original approaches to data, hardware, and real-world systems.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="[TBD]">
-  <meta property="og:image" content="[TBD]">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Foundation Models for the Brain | E184 × NeuroNYC">
-  <meta name="twitter:description" content="An invite-only research convening bringing together researchers with original approaches to data, hardware, and real-world systems.">
-  <meta name="twitter:image" content="[TBD]">
-
+  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="icon" href="assets/favicon.svg">
-  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    :root {
+      --background: #F6F4F0;
+      --text-primary: #2D2D2D;
+      --text-muted: #6B6B6B;
+      --accent: #A8D5E2;
+      --divider: #D4D1CC;
+
+      --font-serif: "Libre Baskerville", Georgia, "Times New Roman", serif;
+      --font-sans: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      --content-width: 680px;
+      --left-margin: 18vw;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--text-primary);
+      background-color: var(--background);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Layout */
+    .page-container {
+      padding-left: var(--left-margin);
+      padding-right: 5vw;
+    }
+
+    .content {
+      max-width: var(--content-width);
+    }
+
+    /* Navigation */
+    nav {
+      padding: 40px 0 60px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      max-width: var(--content-width);
+    }
+
+    .nav-brand {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .nav-brand:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Hero */
+    .hero {
+      padding-bottom: 80px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 540px;
+    }
+
+    .hero-date {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+
+    .hero-description {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 580px;
+    }
+
+    /* Separator */
+    .separator {
+      padding: 70px 0;
+      color: var(--divider);
+      font-size: 18px;
+      letter-spacing: 0.5em;
+    }
+
+    /* Quote */
+    .quote {
+      padding-bottom: 120px;
+    }
+
+    .quote blockquote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 560px;
+    }
+
+    .quote cite {
+      display: block;
+      margin-top: 16px;
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* Sections */
+    section {
+      padding-bottom: 120px;
+    }
+
+    .section-header {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 32px;
+    }
+
+    /* About */
+    .about p {
+      margin-bottom: 1.5em;
+      max-width: 600px;
+    }
+
+    .about p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Program */
+    .program-list {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .program-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 24px;
+    }
+
+    .program-time {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .program-content {
+      max-width: 520px;
+    }
+
+    .program-title {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .program-description {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .program-note {
+      margin-top: 40px;
+      font-size: 15px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Hosts */
+    .hosts p {
+      font-size: 17px;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .hosts a {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-color: var(--divider);
+      text-underline-offset: 3px;
+    }
+
+    .hosts a:hover {
+      text-decoration-color: var(--text-primary);
+    }
+
+    /* Contact */
+    .contact-header {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 32px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 400px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .form-group label .optional {
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      padding: 12px 14px;
+      border: 1px solid var(--divider);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--text-primary);
+      transition: border-color 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--text-muted);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    .submit-btn {
+      align-self: flex-start;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: transparent;
+      border: 1px solid var(--text-primary);
+      padding: 12px 28px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background: var(--text-primary);
+      color: var(--background);
+    }
+
+    .contact-email {
+      margin-top: 40px;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .contact-email a {
+      color: var(--text-primary);
+      text-decoration: underline;
+      text-decoration-color: var(--divider);
+      text-underline-offset: 3px;
+    }
+
+    .contact-email a:hover {
+      text-decoration-color: var(--text-primary);
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 0;
+      border-top: 1px solid var(--divider);
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      :root {
+        --left-margin: 24px;
+      }
+
+      .page-container {
+        padding-right: 24px;
+      }
+
+      .content {
+        max-width: 100%;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 16px;
+        padding: 32px 0 48px 0;
+      }
+
+      .hero-title {
+        font-size: 2.25rem;
+      }
+
+      .program-item {
+        grid-template-columns: 48px 1fr;
+        gap: 16px;
+      }
+
+      section {
+        padding-bottom: 80px;
+      }
+
+      .separator {
+        padding: 50px 0;
+      }
+
+      .quote {
+        padding-bottom: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.875rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.125rem;
+      }
+
+      .program-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .program-time {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-container">
-      <a href="#hero" class="nav-brand">
-        <span class="nav-logo">E184 × NeuroNYC</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#program">Program</a></li>
-        <li><a href="#speakers">Panelists</a></li>
-        <li><a href="#partners">Partners</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+  <div class="page-container">
+    <div class="content">
 
-  <main>
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-      <div class="hero-container">
-        <div class="hero-main">
-          <p class="hero-eyebrow">E184 × NeuroNYC Research Convening</p>
+      <!-- Navigation -->
+      <header>
+        <nav>
+          <a href="#" class="nav-brand">E184 × NeuroNYC</a>
+          <div class="nav-links">
+            <a href="#program">Program</a> · <a href="#hosts">Hosts</a> · <a href="#contact">Contact</a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <!-- Hero -->
+        <section class="hero">
           <h1 class="hero-title">Foundation Models<br>for the Brain</h1>
-          <div class="hero-accent"></div>
           <p class="hero-subtitle">Laying the groundwork for the next stage in neurotech and AI</p>
-          <p class="hero-description">An invite-only evening bringing together researchers with original approaches to data, hardware, and real-world systems.</p>
-          <a href="#contact" class="cta-button">Request an invite</a>
-        </div>
-        <aside class="hero-meta-block">
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">Date</span>
-            <span class="hero-meta-value">March 26, 2026</span>
-          </div>
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">Time</span>
-            <span class="hero-meta-value">5:00–9:00 PM</span>
-          </div>
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">Location</span>
-            <span class="hero-meta-value">Brown Rudnick<br>New York City</span>
-          </div>
-        </aside>
-      </div>
-    </section>
+          <p class="hero-date">March 26, 2026 · 5–9 PM · New York City</p>
+          <p class="hero-description">An invite-only evening for researchers working on brain foundation models—across hardware, data, and real-world systems.</p>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-      <div class="container">
-        <h2 class="section-title">About</h2>
-        <div class="about-content">
-          <p>As brain foundation models take shape, progress depends on the right people being in dialogue—across methods, sensing modalities, data infrastructure, and real-world systems. This invite-only evening convenes researchers and practitioners to compare approaches, surface disagreements, and help each other build better. Short panels open the conversation; most of the time is reserved for discussion.</p>
-        </div>
-      </div>
-    </section>
+        <!-- Separator -->
+        <div class="separator">· · ·</div>
 
-    <!-- Program Section -->
-    <section id="program" class="section section-alt">
-      <div class="container">
-        <h2 class="section-title">Program</h2>
-        <div class="agenda">
-          <div class="agenda-item">
-            <span class="agenda-time">5:00</span>
-            <span class="agenda-event">Welcome</span>
-          </div>
-          <div class="agenda-item">
-            <span class="agenda-time">5:15</span>
-            <span class="agenda-event">Keynote [TBD]</span>
-          </div>
-          <div class="agenda-item agenda-panel">
-            <span class="agenda-time">5:45</span>
-            <div class="agenda-panel-content">
-              <span class="agenda-event">Panel 1 — Building a High-Quality Brain Foundation Model</span>
-              <p class="agenda-panel-summary">Constraints and disagreements: scale vs fidelity, workaround strategies, and what "high-quality" should mean in practice.</p>
+        <!-- Quote -->
+        <section class="quote">
+          <blockquote>
+            "The most fruitful areas for the growth of the sciences were those which had been neglected as a no-man's land between the various established fields."
+          </blockquote>
+          <cite>— Norbert Wiener, 1948</cite>
+        </section>
+
+        <!-- About -->
+        <section class="about" id="about">
+          <p>Brain foundation models are taking shape across biology, computer science, and engineering—pursued by neurotech companies, academic labs, and researchers bringing methods from fields as varied as astrophysics and deep learning. With this activity comes a set of live questions: What data do these models actually require? What hardware can produce it? Is scale the answer, or does fidelity matter more? Different groups are proposing very different solutions, and the answers are far from settled.</p>
+          <p>This convening brings researchers into the same room to compare approaches, surface disagreements, and think together about what "high-quality" should mean in practice. Two panels open the conversation; most of the evening is reserved for discussion. Attendance is by invitation—we're prioritizing researchers and practitioners working directly on these problems, though colleagues from industry and adjacent fields are welcome.</p>
+        </section>
+
+        <!-- Program -->
+        <section id="program">
+          <h2 class="section-header">Program</h2>
+          <div class="program-list">
+            <div class="program-item">
+              <span class="program-time">5:00</span>
+              <div class="program-content">
+                <p class="program-title">Welcome and drinks</p>
+              </div>
+            </div>
+            <div class="program-item">
+              <span class="program-time">5:30</span>
+              <div class="program-content">
+                <p class="program-title">Panel 1 — Building a High-Quality Brain Foundation Model</p>
+                <p class="program-description">Constraints, workaround strategies, and what the field still needs to figure out.</p>
+              </div>
+            </div>
+            <div class="program-item">
+              <span class="program-time">6:30</span>
+              <div class="program-content">
+                <p class="program-title">Panel 2 — From Research to Deployment</p>
+                <p class="program-description">Validation, integration, and near-term value across clinical, invasive, and consumer paths.</p>
+              </div>
+            </div>
+            <div class="program-item">
+              <span class="program-time">7:30</span>
+              <div class="program-content">
+                <p class="program-title">Keynote</p>
+              </div>
+            </div>
+            <div class="program-item">
+              <span class="program-time">8:00</span>
+              <div class="program-content">
+                <p class="program-title">Reception and informal discussion</p>
+              </div>
             </div>
           </div>
-          <div class="agenda-item agenda-panel">
-            <span class="agenda-time">6:45</span>
-            <div class="agenda-panel-content">
-              <span class="agenda-event">Panel 2 — From Research to Deployment</span>
-              <p class="agenda-panel-summary">A grounded look at validation, integration, reliability, and near-term value across clinical, invasive, and consumer paths.</p>
-            </div>
-          </div>
-          <div class="agenda-item">
-            <span class="agenda-time">7:45</span>
-            <span class="agenda-event">Reception / informal discussion</span>
-          </div>
-        </div>
-      </div>
-    </section>
+          <p class="program-note">Panelists to be announced</p>
+        </section>
 
-    <!-- Panelists Section -->
-    <section id="speakers" class="section">
-      <div class="container">
-        <h2 class="section-title">Panelists</h2>
-        <p class="speakers-subheading">To be announced</p>
-        <p class="speakers-note">Panelist list will be posted as invitations are confirmed.</p>
-      </div>
-    </section>
+        <!-- Hosts -->
+        <section class="hosts" id="hosts">
+          <h2 class="section-header">Hosts & Venue</h2>
+          <p>Convened by <a href="https://e184.org" target="_blank" rel="noopener">E184</a> and <a href="https://neuronyc.org" target="_blank" rel="noopener">NeuroNYC</a></p>
+          <p>Hosted at Brown Rudnick, New York</p>
+        </section>
 
-    <!-- Partners Section -->
-    <section id="partners" class="section section-alt">
-      <div class="container">
-        <h2 class="section-title">Hosts & Venue</h2>
-        <div class="partners-list">
-          <p class="partner-item"><a href="https://e184.org" target="_blank" rel="noopener">e184</a> <span class="partner-role">— co-host</span></p>
-          <p class="partner-item"><a href="https://neuronyc.org" target="_blank" rel="noopener">NeuroNYC</a> <span class="partner-role">— co-host</span></p>
-          <p class="partner-item"><a href="https://brownrudnick.com" target="_blank" rel="noopener">Brown Rudnick</a> <span class="partner-role">— venue partner</span></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-      <div class="container">
-        <h2 class="section-title">Contact</h2>
-        <p class="contact-intro">Questions? Contact Margot Hanley (NeuroNYC).</p>
-        <form id="contactForm" class="contact-form">
-          <div class="form-row">
+        <!-- Contact -->
+        <section id="contact">
+          <h2 class="contact-header">Interested in attending?</h2>
+          <form class="contact-form" action="https://formspree.io/f/placeholder" method="POST">
             <div class="form-group">
-              <label for="contactName">Name</label>
-              <input type="text" id="contactName" name="name" required autocomplete="name">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
-              <label for="contactAffiliation">Affiliation</label>
-              <input type="text" id="contactAffiliation" name="affiliation" required autocomplete="organization">
+              <label for="affiliation">Affiliation</label>
+              <input type="text" id="affiliation" name="affiliation" required>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="contactNote">Note <span class="optional">(optional)</span></label>
-            <textarea id="contactNote" name="note" rows="2"></textarea>
-          </div>
-          <button type="submit" class="cta-button">Send request</button>
-        </form>
-      </div>
-    </section>
-  </main>
+            <div class="form-group">
+              <label for="note">Note <span class="optional">(optional)</span></label>
+              <textarea id="note" name="note" placeholder="Brief context on your work or interest"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+          </form>
+          <p class="contact-email">For other questions, reach out to Margot Hanley at <a href="mailto:margothanley@gmail.com">margothanley@gmail.com</a></p>
+        </section>
+      </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>Foundation Models for the Brain · March 26, 2026 · New York City</p>
+      <!-- Footer -->
+      <footer>
+        <p>Foundation Models for the Brain · March 26, 2026 · New York City</p>
+      </footer>
+
     </div>
-  </footer>
-
-  <script>
-    (function() {
-      const form = document.getElementById('contactForm');
-
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const name = document.getElementById('contactName').value.trim();
-        const affiliation = document.getElementById('contactAffiliation').value.trim();
-        const note = document.getElementById('contactNote').value.trim();
-
-        const subject = encodeURIComponent('Foundation Models for the Brain — Invite request');
-
-        let body = `Name: ${name}\nAffiliation: ${affiliation}`;
-        if (note) {
-          body += `\n\nNote:\n${note}`;
-        }
-        body = encodeURIComponent(body);
-
-        const mailto = `mailto:[TBD-email]?subject=${subject}&body=${body}`;
-        window.location.href = mailto;
-
-        form.reset();
-      });
-    })();
-  </script>
+  </div>
 </body>
 </html>
