@@ -148,25 +148,27 @@
       margin-bottom: 20px;
     }
 
-    /* Hero Subtitle - Sans, clearly secondary */
-    .hero-subtitle {
+    /* Hero text: unified system for subtitle, lede, and meta */
+    .hero-subtitle,
+    .hero-lede {
       font-family: var(--font-sans);
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 400;
       font-style: normal;
-      line-height: 1.45;
+      line-height: 1.5;
       color: var(--muted);
-      margin-bottom: 28px;
-      max-width: 480px;
+      max-width: 540px;
+      margin: 0 0 14px 0;
     }
 
-    /* Date/Location - System metadata */
     .hero-meta {
       font-family: var(--font-sans);
-      font-size: 15px;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-      color: #5A5A5A;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #4f4f4f;
+      letter-spacing: 0.02em;
+      margin: 0;
     }
 
     /* ========== HERO ANIMATION ========== */
@@ -229,24 +231,25 @@
     .epigraph {
       border-left: 3px solid var(--accent);
       padding-left: 20px;
-      margin-bottom: 40px;
+      margin: 0 0 40px;
       max-width: 580px;
     }
 
     .epigraph blockquote {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 19px;
+      font-family: var(--font-sans);
+      font-size: 18px;
+      font-weight: 400;
+      font-style: normal;
       line-height: 1.5;
-      color: var(--ink);
+      color: var(--muted);
       margin: 0 0 10px;
     }
 
     .epigraph cite {
       display: block;
       font-family: var(--font-sans);
+      font-size: 14px;
       font-style: normal;
-      font-size: var(--small);
       color: var(--quiet);
     }
 
@@ -259,7 +262,7 @@
       font-size: var(--body);
       margin-bottom: 24px;
       line-height: var(--lh-body);
-      color: var(--ink);
+      color: var(--muted);
     }
 
     /* ========== FORMAT LINE ========== */
@@ -390,6 +393,23 @@
     .hosts-list .role {
       color: var(--muted);
       font-weight: 400;
+    }
+
+    .hosts-meta {
+      font-size: var(--small);
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 640px;
+    }
+
+    .hosts-meta a {
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .hosts-meta a:hover {
+      color: var(--accent);
     }
 
     .organizers {
@@ -550,8 +570,10 @@
         padding-bottom: 48px;
       }
 
-      .hero-subtitle {
-        font-size: 18px;
+      .hero-subtitle,
+      .hero-lede,
+      .hero-meta {
+        font-size: 16px;
       }
 
       .hero-visual {
@@ -574,8 +596,10 @@
         --h2: 20px;
       }
 
-      .hero-subtitle {
-        font-size: 17px;
+      .hero-subtitle,
+      .hero-lede,
+      .hero-meta {
+        font-size: 15px;
       }
 
       .hero-visual {
@@ -610,7 +634,8 @@
       <section class="hero">
         <div class="hero-content">
           <h1 class="hero-title">Foundation Models<br>for the Brain</h1>
-          <p class="hero-subtitle">A research convening on the next stage in neurotech and AI</p>
+          <p class="hero-subtitle">Laying the groundwork for the next stage in neurotech and AI</p>
+          <p class="hero-lede">An invite-only evening for researchers working on brain foundation models—across hardware, data, and real-world systems.</p>
           <p class="hero-meta">March 26, 2026 · 5–9 PM · Brown Rudnick · New York City</p>
         </div>
 
@@ -638,9 +663,9 @@
         <h2 class="section-title">Purpose of the event</h2>
 
         <div class="purpose-content">
-          <p>Brain foundation models are advancing quickly, but the field is still working through basic constraints: what kinds of data are realistically available, what today's sensors can and can't capture, and what "progress" should mean in practice.</p>
+          <p>Brain foundation models are advancing quickly, but the field is still working through basic constraints: what kinds of data are realistically available, what today's sensors can and can't capture, and what "progress" should mean in practice. Across the field, teams are pursuing different strategies—pushing existing sensors further, leaning on multimodal inputs, drawing on non-human data, building models around specific settings, or prioritizing near-term deployment.</p>
 
-          <p>This invite-only evening brings together researchers and practitioners to compare approaches, surface disagreements, and make room for the conversations that don't happen in papers or on stage. Teams are pursuing different strategies—pushing existing sensors further, leaning on multimodal inputs, building models around specific settings. This evening puts those approaches in dialogue.</p>
+          <p>This invite-only evening brings together an interdisciplinary group of researchers and practitioners to share what's working, what isn't, and what "working" should even mean—given constraints in neural data, sensing, and deployment.</p>
         </div>
 
         <p class="format-line"><strong>Format:</strong> Working evening with drinks and light fare. Two panels, short provocations, and substantial time for discussion.</p>
@@ -720,15 +745,34 @@
 
       <!-- Hosts Section -->
       <section id="hosts">
-        <h2 class="section-title">Hosts and venue</h2>
+        <h2 class="section-title">Hosts & Venue</h2>
 
         <div class="hosts-list">
-          <p><a href="https://e184.org" target="_blank" rel="noopener">e184</a> <span class="role">— Biotechnology and neurotechnology research organization</span></p>
-          <p><a href="https://neuronyc.org" target="_blank" rel="noopener">NeuroNYC</a> <span class="role">— Nonprofit fostering the New York City neurotechnology ecosystem</span></p>
-          <p><a href="https://www.brownrudnick.com" target="_blank" rel="noopener">Brown Rudnick</a> <span class="role">— International law firm, venue partner</span></p>
+          <p>
+            <a href="https://e184.org" target="_blank" rel="noopener">e184</a>
+            <span class="role">— Co-host and research partner</span>
+          </p>
+          <p>
+            <a href="https://neuro-nyc.org" target="_blank" rel="noopener">NeuroNYC</a>
+            <span class="role">— Co-host and community partner</span>
+          </p>
+          <p>
+            <a href="https://www.brownrudnick.com" target="_blank" rel="noopener">Brown Rudnick</a>
+            <span class="role">— Venue partner</span>
+          </p>
         </div>
 
-        <p class="organizers">Organized by <a href="https://www.linkedin.com/in/peter-zhegin-526a993/" target="_blank" rel="noopener">Peter Zhegin</a> (e184) and <a href="https://www.linkedin.com/in/margot-hanley-phd-5183aa20/" target="_blank" rel="noopener">Margot Hanley</a> (NeuroNYC)</p>
+        <p class="hosts-meta">
+          Financial sponsorship provided by <a href="https://e184.org" target="_blank" rel="noopener">e184</a>.
+          Venue generously provided by <a href="https://www.brownrudnick.com" target="_blank" rel="noopener">Brown Rudnick</a>.
+        </p>
+
+        <p class="organizers">
+          Organized by
+          <a href="https://www.linkedin.com/in/margot-hanley-phd-5183aa20/" target="_blank" rel="noopener">Margot Hanley</a> (NeuroNYC)
+          and
+          <a href="https://www.linkedin.com/in/peter-zhegin-526a993/" target="_blank" rel="noopener">Peter Zhegin</a> (e184)
+        </p>
       </section>
 
       <!-- Divider -->
