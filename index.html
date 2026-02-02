@@ -10,18 +10,38 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
   <style>
+    /* ========== DESIGN TOKENS ========== */
     :root {
-      --background: #F6F4F0;
-      --text-primary: #2D2D2D;
-      --text-muted: #6B6B6B;
-      --accent: #A8D5E2;
-      --accent-strong: #7BC4D6;
-      --divider: #D4D1CC;
+      /* Colors */
+      --ink: #1F1F1F;
+      --muted: #6B6B6B;
+      --quiet: #8A8A8A;
+      --rule: #E3E3E3;
+      --bg: #F7F6F4;
+      --accent: #79BFD0;
 
+      /* Fonts */
+      --font-display: Georgia, "Times New Roman", serif;
       --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      --font-serif: "Georgia", "Times New Roman", serif;
 
-      --body-size: 17px;
+      /* Type scale */
+      --h1: clamp(56px, 6vw, 76px);
+      --h2: 26px;
+      --h3: 18px;
+      --kicker: 12px;
+      --body: 17px;
+      --small: 15px;
+
+      /* Line heights */
+      --lh-tight: 1.08;
+      --lh-head: 1.2;
+      --lh-body: 1.65;
+
+      /* Letter spacing */
+      --track-tight: -0.01em;
+      --track-caps: 0.18em;
+
+      /* Layout */
       --left-margin: 10vw;
     }
 
@@ -37,10 +57,10 @@
 
     body {
       font-family: var(--font-sans);
-      font-size: var(--body-size);
-      line-height: 1.6;
-      color: var(--text-primary);
-      background-color: var(--background);
+      font-size: var(--body);
+      line-height: var(--lh-body);
+      color: var(--ink);
+      background-color: var(--bg);
       -webkit-font-smoothing: antialiased;
     }
 
@@ -60,29 +80,30 @@
       justify-content: space-between;
       align-items: center;
       padding: 24px 0;
-      border-bottom: 1px solid var(--divider);
+      border-bottom: 1px solid var(--rule);
       margin-bottom: 80px;
     }
 
     .nav-brand {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-size: var(--kicker);
+      font-weight: 500;
+      letter-spacing: var(--track-caps);
       text-transform: uppercase;
-      color: var(--text-primary);
+      color: var(--muted);
       text-decoration: none;
+      transition: color 0.2s ease;
     }
 
     .nav-brand:hover {
-      color: var(--accent-strong);
+      color: var(--accent);
     }
 
     .nav-links {
-      font-size: 12px;
+      font-size: var(--kicker);
       font-weight: 500;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--quiet);
     }
 
     .nav-links a {
@@ -92,7 +113,7 @@
     }
 
     .nav-links a:hover {
-      color: var(--accent-strong);
+      color: var(--accent);
     }
 
     /* ========== HERO ========== */
@@ -108,51 +129,53 @@
       padding-top: 20px;
     }
 
+    /* Eyebrow / Kicker */
     .hero-kicker {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-size: var(--kicker);
+      font-weight: 500;
+      letter-spacing: var(--track-caps);
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: #4F4F4F;
       margin-bottom: 24px;
     }
 
+    /* Hero Title - Serif display, the ONE editorial element */
     .hero-title {
-      font-family: var(--font-serif);
-      font-size: clamp(2.8rem, 5.5vw, 4rem);
+      font-family: var(--font-display);
+      font-size: var(--h1);
       font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
+      line-height: var(--lh-tight);
+      letter-spacing: var(--track-tight);
+      color: var(--ink);
       margin-bottom: 20px;
     }
 
+    /* Hero Subtitle - Sans, NOT italic, steps back */
     .hero-subtitle {
-      font-family: var(--font-serif);
-      font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+      font-family: var(--font-sans);
+      font-size: 22px;
       font-weight: 400;
-      font-style: italic;
-      line-height: 1.35;
-      color: var(--text-muted);
+      font-style: normal;
+      line-height: 1.4;
+      color: var(--muted);
       margin-bottom: 32px;
       max-width: 500px;
     }
 
+    /* Date/Location - System metadata, not prose */
     .hero-meta {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #4F4F4F;
       margin-bottom: 20px;
     }
 
-    .hero-meta .small-caps {
-      font-variant: small-caps;
-      text-transform: lowercase;
-    }
-
+    /* Body intro - steps back */
     .hero-lede {
-      font-size: var(--body-size);
-      color: var(--text-muted);
+      font-size: 16px;
+      color: #6F6F6F;
       line-height: 1.6;
       max-width: 540px;
     }
@@ -173,7 +196,7 @@
     .section-divider {
       position: relative;
       height: 1px;
-      background: var(--divider);
+      background: var(--rule);
       margin: 60px 0;
     }
 
@@ -184,7 +207,7 @@
       transform: translateY(-50%);
       width: 10px;
       height: 10px;
-      background: var(--accent-strong);
+      background: var(--accent);
       border-radius: 50%;
     }
 
@@ -199,49 +222,60 @@
       padding-bottom: 20px;
     }
 
-    .section-header {
+    /* Section titles - Real headings, sentence case, anchors the page */
+    .section-title {
       font-family: var(--font-sans);
-      font-size: 13px;
+      font-size: var(--h2);
       font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 28px;
+      color: var(--ink);
+      margin-bottom: 32px;
+      line-height: var(--lh-head);
     }
 
-    /* ========== PURPOSE ========== */
-    .purpose-quote {
-      border-left: 2px solid var(--accent-strong);
-      padding-left: 24px;
+    /* Subsection titles */
+    .subsection-title {
+      font-family: var(--font-sans);
+      font-size: var(--h3);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: var(--lh-head);
+    }
+
+    /* ========== EPIGRAPH (Quote above section) ========== */
+    .epigraph {
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
       margin-bottom: 40px;
       max-width: 600px;
     }
 
-    .purpose-quote blockquote {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 1.1rem;
-      line-height: 1.55;
-      color: var(--text-muted);
+    .epigraph blockquote {
+      font-family: var(--font-display);
+      font-size: 20px;
+      line-height: 1.45;
+      color: var(--ink);
+      margin: 0 0 10px;
     }
 
-    .purpose-quote cite {
+    .epigraph cite {
       display: block;
-      margin-top: 12px;
       font-family: var(--font-sans);
       font-style: normal;
-      font-size: 14px;
-      color: var(--text-muted);
+      font-size: var(--small);
+      color: var(--quiet);
     }
 
+    /* ========== PURPOSE CONTENT ========== */
     .purpose-content {
       max-width: 680px;
     }
 
     .purpose-content p {
-      font-size: var(--body-size);
+      font-size: var(--body);
       margin-bottom: 24px;
-      line-height: 1.7;
+      line-height: var(--lh-body);
+      color: var(--ink);
     }
 
     /* ========== PROVOCATIONS ========== */
@@ -250,64 +284,41 @@
       max-width: 680px;
     }
 
-    .provocations-title {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-
     .provocations-list {
       list-style: none;
     }
 
     .provocations-list li {
-      position: relative;
-      padding-left: 20px;
-      margin-bottom: 16px;
-      font-size: var(--body-size);
-      line-height: 1.5;
+      margin-bottom: 20px;
     }
 
-    .provocations-list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 8px;
-      width: 6px;
-      height: 6px;
-      background: var(--accent-strong);
-      border-radius: 50%;
+    .provocations-list .question {
+      font-family: var(--font-sans);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.35;
+      margin-bottom: 6px;
     }
 
-    .provocations-list .subtext {
-      display: block;
-      font-size: 15px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* ========== FORMAT BOX ========== */
-    .format-box {
-      margin-top: 48px;
-      padding: 28px;
-      background: rgba(168, 213, 226, 0.12);
-      border-radius: 4px;
-      max-width: 680px;
-    }
-
-    .format-box p {
-      font-size: var(--body-size);
-      color: var(--text-muted);
-      margin: 0;
+    .provocations-list .context {
+      font-size: var(--small);
+      color: var(--muted);
       line-height: 1.6;
     }
 
-    .format-box .artifact {
-      margin-top: 16px;
-      font-style: italic;
+    /* ========== FORMAT LINE ========== */
+    .format-line {
+      margin-top: 40px;
+      max-width: 680px;
+      font-size: var(--small);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .format-line strong {
+      font-weight: 600;
+      color: var(--ink);
     }
 
     /* ========== PROGRAM ========== */
@@ -317,83 +328,87 @@
 
     .program-item {
       display: grid;
-      grid-template-columns: 70px 1fr;
+      grid-template-columns: 60px 1fr;
       gap: 24px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--divider);
+      padding: 18px 0;
+      border-bottom: 1px solid var(--rule);
     }
 
     .program-item:first-child {
       padding-top: 0;
     }
 
+    .program-item:last-child {
+      border-bottom: none;
+    }
+
     .program-time {
       font-size: 14px;
-      font-weight: 600;
-      color: var(--text-muted);
+      font-weight: 500;
+      color: var(--quiet);
       font-variant-numeric: tabular-nums;
     }
 
     .program-title {
-      font-size: var(--body-size);
+      font-size: var(--body);
       font-weight: 600;
-      color: var(--text-primary);
+      color: var(--ink);
       margin-bottom: 4px;
     }
 
     .program-desc {
-      font-size: 15px;
-      color: var(--text-muted);
+      font-size: var(--small);
+      color: var(--muted);
       line-height: 1.5;
     }
 
     .program-note {
-      margin-top: 28px;
-      font-size: 15px;
-      color: var(--text-muted);
+      margin-top: 24px;
+      font-size: var(--small);
+      color: var(--quiet);
       font-style: italic;
     }
 
     /* ========== HOSTS ========== */
     .hosts-list {
       max-width: 680px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .hosts-list p {
-      margin-bottom: 12px;
-      font-size: var(--body-size);
+      margin-bottom: 10px;
+      font-size: var(--body);
     }
 
     .hosts-list a {
-      color: var(--text-primary);
+      color: var(--ink);
       text-decoration: none;
       font-weight: 600;
       transition: color 0.2s ease;
     }
 
     .hosts-list a:hover {
-      color: var(--accent-strong);
+      color: var(--accent);
     }
 
     .hosts-list .role {
-      color: var(--text-muted);
+      color: var(--muted);
       font-weight: 400;
     }
 
     .organizers {
-      font-size: 15px;
-      color: var(--text-muted);
+      font-size: var(--small);
+      color: var(--muted);
     }
 
     .organizers a {
-      color: var(--text-primary);
+      color: var(--ink);
       text-decoration: none;
       transition: color 0.2s ease;
     }
 
     .organizers a:hover {
-      color: var(--accent-strong);
+      color: var(--accent);
     }
 
     /* ========== CONTACT ========== */
@@ -413,13 +428,12 @@
 
     .form-group label {
       font-size: 14px;
-      font-weight: 600;
-      color: var(--text-primary);
+      font-weight: 500;
+      color: var(--quiet);
     }
 
     .form-group .optional {
       font-weight: 400;
-      color: var(--text-muted);
     }
 
     .form-group input,
@@ -428,16 +442,16 @@
       font-size: 16px;
       padding: 12px 0;
       border: none;
-      border-bottom: 1px solid var(--divider);
+      border-bottom: 1px solid var(--rule);
       background: transparent;
-      color: var(--text-primary);
+      color: var(--ink);
       transition: border-color 0.2s ease;
     }
 
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
-      border-bottom-color: var(--accent-strong);
+      border-bottom-color: var(--accent);
     }
 
     .form-group textarea {
@@ -450,45 +464,45 @@
       font-family: var(--font-sans);
       font-size: 14px;
       font-weight: 600;
-      color: var(--text-primary);
+      color: var(--ink);
       background: transparent;
       border: none;
-      border-bottom: 1px solid var(--text-primary);
+      border-bottom: 1px solid var(--ink);
       padding: 0 0 4px 0;
       cursor: pointer;
       transition: color 0.2s ease, border-color 0.2s ease;
     }
 
     .submit-btn:hover {
-      color: var(--accent-strong);
-      border-bottom-color: var(--accent-strong);
+      color: var(--accent);
+      border-bottom-color: var(--accent);
     }
 
     .contact-email {
-      font-size: 15px;
-      color: var(--text-muted);
+      font-size: var(--small);
+      color: var(--muted);
     }
 
     .contact-email a {
-      color: var(--text-primary);
+      color: var(--ink);
       text-decoration: none;
       transition: color 0.2s ease;
     }
 
     .contact-email a:hover {
-      color: var(--accent-strong);
+      color: var(--accent);
     }
 
     /* ========== FOOTER ========== */
     footer {
       padding: 48px 0;
-      border-top: 1px solid var(--divider);
+      border-top: 1px solid var(--rule);
       margin-top: 40px;
     }
 
     footer p {
       font-size: 13px;
-      color: var(--text-muted);
+      color: var(--quiet);
     }
 
     /* ========== RESPONSIVE ========== */
@@ -511,6 +525,8 @@
     @media (max-width: 768px) {
       :root {
         --left-margin: 24px;
+        --h1: 44px;
+        --h2: 22px;
       }
 
       .page-wrap {
@@ -524,12 +540,8 @@
         margin-bottom: 48px;
       }
 
-      .hero-title {
-        font-size: 2.2rem;
-      }
-
       .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: 18px;
       }
 
       .hero-visual {
@@ -541,23 +553,28 @@
       }
 
       .program-item {
-        grid-template-columns: 60px 1fr;
+        grid-template-columns: 55px 1fr;
         gap: 16px;
       }
     }
 
     @media (max-width: 480px) {
-      .hero-title {
-        font-size: 1.8rem;
+      :root {
+        --h1: 36px;
+        --h2: 20px;
       }
 
       .hero-subtitle {
-        font-size: 1.1rem;
+        font-size: 17px;
       }
 
       .program-item {
         grid-template-columns: 1fr;
         gap: 8px;
+      }
+
+      .program-time {
+        font-size: 13px;
       }
     }
   </style>
@@ -581,20 +598,15 @@
           <p class="hero-kicker">E184 × NeuroNYC Research Convening</p>
           <h1 class="hero-title">Foundation Models<br>for the Brain</h1>
           <p class="hero-subtitle">Laying the groundwork for the next stage in neurotech and AI</p>
-          <p class="hero-meta">March 26, 2026 · 5–9 <span class="small-caps">PM</span> · Brown Rudnick · New York City</p>
+          <p class="hero-meta">March 26, 2026 · 5–9 PM · Brown Rudnick · New York City</p>
           <p class="hero-lede">An invite-only evening for researchers working on brain foundation models—across hardware, data, and real-world systems.</p>
         </div>
 
-        <!-- ============================================================
-             VISUAL OPTIONS - Uncomment ONE to use
-             ============================================================ -->
-
-        <!-- OPTION 1: Neural Manifold (Latent Space)
-             Dense clusters = learned representations, sparse = raw data -->
+        <!-- Neural Manifold Visual -->
         <div class="hero-visual">
           <svg viewBox="0 0 420 450" preserveAspectRatio="xMidYMid meet">
             <!-- Cluster 1: Dense core (learned representations) -->
-            <g fill="#7BC4D6">
+            <g fill="#79BFD0">
               <circle cx="180" cy="160" r="5" opacity="0.9"/>
               <circle cx="195" cy="148" r="4" opacity="0.85"/>
               <circle cx="168" cy="145" r="4.5" opacity="0.8"/>
@@ -616,7 +628,7 @@
               <circle cx="185" cy="168" r="2" opacity="0.75"/>
             </g>
             <!-- Cluster 2: Secondary cluster -->
-            <g fill="#7BC4D6">
+            <g fill="#79BFD0">
               <circle cx="280" cy="220" r="4.5" opacity="0.85"/>
               <circle cx="295" cy="235" r="4" opacity="0.8"/>
               <circle cx="268" cy="228" r="3.5" opacity="0.75"/>
@@ -652,7 +664,7 @@
               <circle cx="395" cy="310" r="2.5" opacity="0.45"/>
             </g>
             <!-- Connecting lines (structure) -->
-            <g stroke="#7BC4D6" stroke-width="0.8" fill="none" opacity="0.4">
+            <g stroke="#79BFD0" stroke-width="0.8" fill="none" opacity="0.4">
               <line x1="180" y1="160" x2="195" y2="148"/>
               <line x1="180" y1="160" x2="168" y2="145"/>
               <line x1="180" y1="160" x2="188" y2="175"/>
@@ -666,205 +678,13 @@
               <path d="M 215 172 Q 248 195 268 215"/>
             </g>
             <!-- Transition zone -->
-            <g fill="#7BC4D6">
+            <g fill="#79BFD0">
               <circle cx="220" cy="280" r="3" opacity="0.6"/>
               <circle cx="195" cy="265" r="2.5" opacity="0.55"/>
               <circle cx="245" cy="290" r="2.5" opacity="0.55"/>
             </g>
           </svg>
         </div>
-
-        <!-- OPTION 2: Signal-to-Structure (Noise → Order transformation)
-             Left side = chaotic/noisy, Right side = organized/structured
-        <div class="hero-visual">
-          <svg viewBox="0 0 420 450" preserveAspectRatio="xMidYMid meet">
-            <!-- Left: Chaotic noise (raw signal) - ->
-            <g fill="#A8D5E2">
-              <circle cx="45" cy="80" r="2" opacity="0.4"/>
-              <circle cx="62" cy="95" r="1.5" opacity="0.35"/>
-              <circle cx="38" cy="110" r="2.5" opacity="0.45"/>
-              <circle cx="55" cy="125" r="1.5" opacity="0.35"/>
-              <circle cx="70" cy="108" r="2" opacity="0.4"/>
-              <circle cx="48" cy="140" r="2" opacity="0.4"/>
-              <circle cx="65" cy="155" r="1.5" opacity="0.35"/>
-              <circle cx="42" cy="168" r="2.5" opacity="0.45"/>
-              <circle cx="58" cy="182" r="2" opacity="0.4"/>
-              <circle cx="72" cy="172" r="1.5" opacity="0.35"/>
-              <circle cx="50" cy="200" r="2" opacity="0.4"/>
-              <circle cx="68" cy="215" r="2.5" opacity="0.45"/>
-              <circle cx="45" cy="230" r="1.5" opacity="0.35"/>
-              <circle cx="60" cy="248" r="2" opacity="0.4"/>
-              <circle cx="75" cy="235" r="2" opacity="0.4"/>
-              <circle cx="52" cy="265" r="2.5" opacity="0.45"/>
-              <circle cx="40" cy="280" r="1.5" opacity="0.35"/>
-              <circle cx="65" cy="295" r="2" opacity="0.4"/>
-              <circle cx="55" cy="312" r="2" opacity="0.4"/>
-              <circle cx="70" cy="328" r="1.5" opacity="0.35"/>
-              <circle cx="48" cy="345" r="2.5" opacity="0.45"/>
-              <circle cx="62" cy="360" r="2" opacity="0.4"/>
-              <circle cx="42" cy="378" r="1.5" opacity="0.35"/>
-            </g>
-            <!-- Transition zone (middle) - ->
-            <g fill="#7BC4D6" opacity="0.6">
-              <circle cx="140" cy="100" r="2.5"/>
-              <circle cx="155" cy="130" r="2"/>
-              <circle cx="145" cy="165" r="2.5"/>
-              <circle cx="160" cy="200" r="2"/>
-              <circle cx="150" cy="235" r="2.5"/>
-              <circle cx="165" cy="270" r="2"/>
-              <circle cx="155" cy="305" r="2.5"/>
-              <circle cx="148" cy="340" r="2"/>
-              <circle cx="162" cy="375" r="2.5"/>
-            </g>
-            <!-- Right: Organized structure (learned representation) - ->
-            <g fill="#7BC4D6">
-              <!-- Row 1 - ->
-              <circle cx="280" cy="90" r="4" opacity="0.85"/>
-              <circle cx="320" cy="90" r="4" opacity="0.85"/>
-              <circle cx="360" cy="90" r="4" opacity="0.85"/>
-              <!-- Row 2 - ->
-              <circle cx="260" cy="140" r="4" opacity="0.9"/>
-              <circle cx="300" cy="140" r="4.5" opacity="0.9"/>
-              <circle cx="340" cy="140" r="4" opacity="0.9"/>
-              <circle cx="380" cy="140" r="4" opacity="0.85"/>
-              <!-- Row 3 - ->
-              <circle cx="280" cy="190" r="4.5" opacity="0.9"/>
-              <circle cx="320" cy="190" r="5" opacity="0.95"/>
-              <circle cx="360" cy="190" r="4.5" opacity="0.9"/>
-              <!-- Row 4 - ->
-              <circle cx="260" cy="240" r="4" opacity="0.9"/>
-              <circle cx="300" cy="240" r="4.5" opacity="0.9"/>
-              <circle cx="340" cy="240" r="4.5" opacity="0.9"/>
-              <circle cx="380" cy="240" r="4" opacity="0.85"/>
-              <!-- Row 5 - ->
-              <circle cx="280" cy="290" r="4.5" opacity="0.9"/>
-              <circle cx="320" cy="290" r="5" opacity="0.95"/>
-              <circle cx="360" cy="290" r="4.5" opacity="0.9"/>
-              <!-- Row 6 - ->
-              <circle cx="260" cy="340" r="4" opacity="0.85"/>
-              <circle cx="300" cy="340" r="4" opacity="0.9"/>
-              <circle cx="340" cy="340" r="4" opacity="0.9"/>
-              <circle cx="380" cy="340" r="4" opacity="0.85"/>
-              <!-- Row 7 - ->
-              <circle cx="280" cy="390" r="4" opacity="0.85"/>
-              <circle cx="320" cy="390" r="4" opacity="0.85"/>
-              <circle cx="360" cy="390" r="4" opacity="0.85"/>
-            </g>
-            <!-- Connecting lines on structured side - ->
-            <g stroke="#7BC4D6" stroke-width="0.8" fill="none" opacity="0.3">
-              <line x1="280" y1="90" x2="260" y2="140"/>
-              <line x1="280" y1="90" x2="300" y2="140"/>
-              <line x1="320" y1="90" x2="300" y2="140"/>
-              <line x1="320" y1="90" x2="340" y2="140"/>
-              <line x1="360" y1="90" x2="340" y2="140"/>
-              <line x1="360" y1="90" x2="380" y2="140"/>
-              <line x1="300" y1="140" x2="280" y2="190"/>
-              <line x1="300" y1="140" x2="320" y2="190"/>
-              <line x1="340" y1="140" x2="320" y2="190"/>
-              <line x1="340" y1="140" x2="360" y2="190"/>
-              <line x1="320" y1="190" x2="300" y2="240"/>
-              <line x1="320" y1="190" x2="340" y2="240"/>
-              <line x1="320" y1="290" x2="300" y2="340"/>
-              <line x1="320" y1="290" x2="340" y2="340"/>
-            </g>
-            <!-- Flow arrows (transformation) - ->
-            <g stroke="#A8D5E2" stroke-width="1" fill="none" opacity="0.4">
-              <path d="M 85 120 Q 110 120 130 115" stroke-dasharray="3,3"/>
-              <path d="M 85 225 Q 110 225 130 220" stroke-dasharray="3,3"/>
-              <path d="M 85 330 Q 110 330 130 325" stroke-dasharray="3,3"/>
-            </g>
-          </svg>
-        </div>
-        -->
-
-        <!-- OPTION 3: Graph Architecture (Neural Network / Constellation)
-             Connected nodes showing information flow
-        <div class="hero-visual">
-          <svg viewBox="0 0 420 450" preserveAspectRatio="xMidYMid meet">
-            <!-- Primary network connections - ->
-            <g stroke="#7BC4D6" stroke-width="1.2" fill="none" opacity="0.5">
-              <!-- Layer 1 to Layer 2 - ->
-              <line x1="80" y1="80" x2="160" y2="140"/>
-              <line x1="80" y1="80" x2="200" y2="120"/>
-              <line x1="120" y1="100" x2="160" y2="140"/>
-              <line x1="120" y1="100" x2="240" y2="160"/>
-              <!-- Layer 2 to Layer 3 (central hub) - ->
-              <line x1="160" y1="140" x2="210" y2="225"/>
-              <line x1="200" y1="120" x2="210" y2="225"/>
-              <line x1="240" y1="160" x2="210" y2="225"/>
-              <line x1="280" y1="130" x2="210" y2="225"/>
-              <line x1="320" y1="100" x2="280" y2="180"/>
-              <line x1="280" y1="180" x2="210" y2="225"/>
-              <!-- Central hub to Layer 4 - ->
-              <line x1="210" y1="225" x2="140" y2="300"/>
-              <line x1="210" y1="225" x2="180" y2="320"/>
-              <line x1="210" y1="225" x2="240" y2="310"/>
-              <line x1="210" y1="225" x2="280" y2="290"/>
-              <line x1="210" y1="225" x2="320" y2="280"/>
-              <!-- Layer 4 to Layer 5 - ->
-              <line x1="140" y1="300" x2="120" y2="380"/>
-              <line x1="180" y1="320" x2="160" y2="395"/>
-              <line x1="240" y1="310" x2="220" y2="400"/>
-              <line x1="280" y1="290" x2="280" y2="385"/>
-              <line x1="320" y1="280" x2="340" y2="370"/>
-            </g>
-            <!-- Secondary/cross connections - ->
-            <g stroke="#A8D5E2" stroke-width="0.6" fill="none" opacity="0.3">
-              <line x1="160" y1="140" x2="280" y2="130"/>
-              <line x1="140" y1="300" x2="180" y2="320"/>
-              <line x1="240" y1="310" x2="280" y2="290"/>
-              <line x1="120" y1="380" x2="160" y2="395"/>
-              <line x1="220" y1="400" x2="280" y2="385"/>
-            </g>
-            <!-- Layer 1 nodes (input) - ->
-            <g fill="#A8D5E2">
-              <circle cx="80" cy="80" r="4" opacity="0.7"/>
-              <circle cx="120" cy="100" r="3.5" opacity="0.65"/>
-              <circle cx="60" cy="120" r="3" opacity="0.5"/>
-              <circle cx="100" cy="140" r="2.5" opacity="0.5"/>
-            </g>
-            <!-- Layer 2 nodes - ->
-            <g fill="#7BC4D6">
-              <circle cx="160" cy="140" r="5" opacity="0.85"/>
-              <circle cx="200" cy="120" r="4.5" opacity="0.8"/>
-              <circle cx="240" cy="160" r="4" opacity="0.75"/>
-              <circle cx="280" cy="130" r="4.5" opacity="0.8"/>
-              <circle cx="320" cy="100" r="4" opacity="0.7"/>
-              <circle cx="280" cy="180" r="4" opacity="0.75"/>
-            </g>
-            <!-- Central hub (Layer 3) - largest node - ->
-            <g fill="#7BC4D6">
-              <circle cx="210" cy="225" r="8" opacity="0.95"/>
-            </g>
-            <!-- Layer 4 nodes - ->
-            <g fill="#7BC4D6">
-              <circle cx="140" cy="300" r="5" opacity="0.85"/>
-              <circle cx="180" cy="320" r="4.5" opacity="0.8"/>
-              <circle cx="240" cy="310" r="5" opacity="0.85"/>
-              <circle cx="280" cy="290" r="4.5" opacity="0.8"/>
-              <circle cx="320" cy="280" r="4" opacity="0.75"/>
-            </g>
-            <!-- Layer 5 nodes (output) - ->
-            <g fill="#A8D5E2">
-              <circle cx="120" cy="380" r="4" opacity="0.7"/>
-              <circle cx="160" cy="395" r="3.5" opacity="0.65"/>
-              <circle cx="220" cy="400" r="4" opacity="0.7"/>
-              <circle cx="280" cy="385" r="3.5" opacity="0.65"/>
-              <circle cx="340" cy="370" r="4" opacity="0.7"/>
-            </g>
-            <!-- Sparse ambient nodes - ->
-            <g fill="#A8D5E2">
-              <circle cx="360" cy="150" r="2.5" opacity="0.4"/>
-              <circle cx="380" cy="200" r="2" opacity="0.35"/>
-              <circle cx="50" cy="200" r="2" opacity="0.35"/>
-              <circle cx="70" cy="260" r="2.5" opacity="0.4"/>
-              <circle cx="370" cy="320" r="2" opacity="0.35"/>
-              <circle cx="40" cy="340" r="2" opacity="0.35"/>
-            </g>
-          </svg>
-        </div>
-        -->
-
       </section>
 
       <!-- Divider -->
@@ -872,14 +692,15 @@
 
       <!-- Purpose Section -->
       <section id="purpose">
-        <h2 class="section-header">Purpose of the Event</h2>
-
-        <div class="purpose-quote">
+        <!-- Epigraph (quote as standalone framing element) -->
+        <div class="epigraph">
           <blockquote>
             "The most fruitful areas for the growth of the sciences were those which had been neglected as a no-man's land between the various established fields."
           </blockquote>
           <cite>— Norbert Wiener, 1948</cite>
         </div>
+
+        <h2 class="section-title">Purpose of the event</h2>
 
         <div class="purpose-content">
           <p>Brain foundation models are advancing quickly, but the field is still working through basic constraints: what kinds of data are realistically available, what today's sensors can and can't capture, and what "progress" should mean in practice.</p>
@@ -890,35 +711,32 @@
         </div>
 
         <div class="provocations">
-          <p class="provocations-title">Core Provocations</p>
+          <h3 class="subsection-title">Core provocations</h3>
           <ul class="provocations-list">
             <li>
-              Where is the bottleneck right now?
-              <span class="subtext">Is progress primarily constrained by sensors, data access, or modeling assumptions?</span>
+              <p class="question">Where is the bottleneck right now?</p>
+              <p class="context">Is progress primarily constrained by sensors, data access, or modeling assumptions?</p>
             </li>
             <li>
-              Which workarounds seem most promising—and why?
-              <span class="subtext">What strategies meaningfully move the needle under current constraints?</span>
+              <p class="question">Which workarounds seem most promising—and why?</p>
+              <p class="context">What strategies meaningfully move the needle under current constraints?</p>
             </li>
             <li>
-              What counts as "enough" data (and of what kind)?
-              <span class="subtext">When does scale help, and when are there hard limits?</span>
+              <p class="question">What counts as "enough" data (and of what kind)?</p>
+              <p class="context">When does scale help, and when are there hard limits?</p>
             </li>
             <li>
-              What does "working" mean in this space?
-              <span class="subtext">Which outcomes or applications feel real today, and which remain aspirational?</span>
+              <p class="question">What does "working" mean in this space?</p>
+              <p class="context">Which outcomes or applications feel real today, and which remain aspirational?</p>
             </li>
             <li>
-              How do research and real-world systems inform one another?
-              <span class="subtext">What can we learn from early deployments, and what gets lost in translation?</span>
+              <p class="question">How do research and real-world systems inform one another?</p>
+              <p class="context">What can we learn from early deployments, and what gets lost in translation?</p>
             </li>
           </ul>
         </div>
 
-        <div class="format-box">
-          <p>A structured, conversation-forward evening with drinks and light fare—designed to maximize time for informal exchange as well as focused discussion. Attendance is by invitation.</p>
-          <p class="artifact">Organizers will produce a short memo synthesizing open questions and points of convergence surfaced during the evening.</p>
-        </div>
+        <p class="format-line"><strong>Format:</strong> Working evening with drinks and light fare. Two panels, a short provocation, and substantial time for discussion. Attendance is by invitation.</p>
       </section>
 
       <!-- Divider -->
@@ -926,7 +744,7 @@
 
       <!-- Program Section -->
       <section id="program">
-        <h2 class="section-header">Program</h2>
+        <h2 class="section-title">Program</h2>
 
         <div class="program-grid">
           <div class="program-item">
@@ -938,14 +756,14 @@
           <div class="program-item">
             <span class="program-time">5:30</span>
             <div>
-              <p class="program-title">Panel 1 — Building a High-Quality Brain Foundation Model</p>
+              <p class="program-title">Panel 1 — Building a high-quality brain foundation model</p>
               <p class="program-desc">Constraints, workaround strategies, and what the field still needs to figure out.</p>
             </div>
           </div>
           <div class="program-item">
             <span class="program-time">6:30</span>
             <div>
-              <p class="program-title">Panel 2 — From Research to Deployment</p>
+              <p class="program-title">Panel 2 — From research to deployment</p>
               <p class="program-desc">Validation, integration, and near-term value across clinical, invasive, and consumer paths.</p>
             </div>
           </div>
@@ -972,7 +790,7 @@
 
       <!-- Hosts Section -->
       <section id="hosts">
-        <h2 class="section-header">Hosts & Venue</h2>
+        <h2 class="section-title">Hosts and venue</h2>
 
         <div class="hosts-list">
           <p><a href="https://e184.org" target="_blank" rel="noopener">E184</a> <span class="role">— Biotechnology and neurotechnology research organization</span></p>
@@ -988,7 +806,7 @@
 
       <!-- Contact Section -->
       <section id="contact">
-        <h2 class="section-header">Request an Invite</h2>
+        <h2 class="section-title">Request an invite</h2>
 
         <form class="contact-form" action="https://formspree.io/f/placeholder" method="POST">
           <div class="form-group">
