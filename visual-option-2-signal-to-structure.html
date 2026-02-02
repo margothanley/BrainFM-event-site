@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Option 2: Signal to Structure</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      background: #F7F6F4;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1F1F1F;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 14px;
+      color: #6B6B6B;
+      margin-bottom: 24px;
+      max-width: 500px;
+    }
+    .visual-container {
+      width: 420px;
+      height: 450px;
+      background: #F7F6F4;
+      border: 1px solid #E3E3E3;
+      border-radius: 4px;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Option 2: Signal to Structure</h1>
+  <p>Left side shows chaotic, noisy raw signal. Right side shows organized, structured learned representation. The transformation from noise to order—what a foundation model does to neural data.</p>
+
+  <div class="visual-container">
+    <svg viewBox="0 0 420 450" preserveAspectRatio="xMidYMid meet">
+      <!-- Left: Chaotic noise (raw signal) -->
+      <g fill="#A8D5E2">
+        <circle cx="45" cy="80" r="2" opacity="0.4"/>
+        <circle cx="62" cy="95" r="1.5" opacity="0.35"/>
+        <circle cx="38" cy="110" r="2.5" opacity="0.45"/>
+        <circle cx="55" cy="125" r="1.5" opacity="0.35"/>
+        <circle cx="70" cy="108" r="2" opacity="0.4"/>
+        <circle cx="48" cy="140" r="2" opacity="0.4"/>
+        <circle cx="65" cy="155" r="1.5" opacity="0.35"/>
+        <circle cx="42" cy="168" r="2.5" opacity="0.45"/>
+        <circle cx="58" cy="182" r="2" opacity="0.4"/>
+        <circle cx="72" cy="172" r="1.5" opacity="0.35"/>
+        <circle cx="50" cy="200" r="2" opacity="0.4"/>
+        <circle cx="68" cy="215" r="2.5" opacity="0.45"/>
+        <circle cx="45" cy="230" r="1.5" opacity="0.35"/>
+        <circle cx="60" cy="248" r="2" opacity="0.4"/>
+        <circle cx="75" cy="235" r="2" opacity="0.4"/>
+        <circle cx="52" cy="265" r="2.5" opacity="0.45"/>
+        <circle cx="40" cy="280" r="1.5" opacity="0.35"/>
+        <circle cx="65" cy="295" r="2" opacity="0.4"/>
+        <circle cx="55" cy="312" r="2" opacity="0.4"/>
+        <circle cx="70" cy="328" r="1.5" opacity="0.35"/>
+        <circle cx="48" cy="345" r="2.5" opacity="0.45"/>
+        <circle cx="62" cy="360" r="2" opacity="0.4"/>
+        <circle cx="42" cy="378" r="1.5" opacity="0.35"/>
+      </g>
+      <!-- Transition zone (middle) -->
+      <g fill="#79BFD0" opacity="0.6">
+        <circle cx="140" cy="100" r="2.5"/>
+        <circle cx="155" cy="130" r="2"/>
+        <circle cx="145" cy="165" r="2.5"/>
+        <circle cx="160" cy="200" r="2"/>
+        <circle cx="150" cy="235" r="2.5"/>
+        <circle cx="165" cy="270" r="2"/>
+        <circle cx="155" cy="305" r="2.5"/>
+        <circle cx="148" cy="340" r="2"/>
+        <circle cx="162" cy="375" r="2.5"/>
+      </g>
+      <!-- Right: Organized structure (learned representation) -->
+      <g fill="#79BFD0">
+        <!-- Row 1 -->
+        <circle cx="280" cy="90" r="4" opacity="0.85"/>
+        <circle cx="320" cy="90" r="4" opacity="0.85"/>
+        <circle cx="360" cy="90" r="4" opacity="0.85"/>
+        <!-- Row 2 -->
+        <circle cx="260" cy="140" r="4" opacity="0.9"/>
+        <circle cx="300" cy="140" r="4.5" opacity="0.9"/>
+        <circle cx="340" cy="140" r="4" opacity="0.9"/>
+        <circle cx="380" cy="140" r="4" opacity="0.85"/>
+        <!-- Row 3 -->
+        <circle cx="280" cy="190" r="4.5" opacity="0.9"/>
+        <circle cx="320" cy="190" r="5" opacity="0.95"/>
+        <circle cx="360" cy="190" r="4.5" opacity="0.9"/>
+        <!-- Row 4 -->
+        <circle cx="260" cy="240" r="4" opacity="0.9"/>
+        <circle cx="300" cy="240" r="4.5" opacity="0.9"/>
+        <circle cx="340" cy="240" r="4.5" opacity="0.9"/>
+        <circle cx="380" cy="240" r="4" opacity="0.85"/>
+        <!-- Row 5 -->
+        <circle cx="280" cy="290" r="4.5" opacity="0.9"/>
+        <circle cx="320" cy="290" r="5" opacity="0.95"/>
+        <circle cx="360" cy="290" r="4.5" opacity="0.9"/>
+        <!-- Row 6 -->
+        <circle cx="260" cy="340" r="4" opacity="0.85"/>
+        <circle cx="300" cy="340" r="4" opacity="0.9"/>
+        <circle cx="340" cy="340" r="4" opacity="0.9"/>
+        <circle cx="380" cy="340" r="4" opacity="0.85"/>
+        <!-- Row 7 -->
+        <circle cx="280" cy="390" r="4" opacity="0.85"/>
+        <circle cx="320" cy="390" r="4" opacity="0.85"/>
+        <circle cx="360" cy="390" r="4" opacity="0.85"/>
+      </g>
+      <!-- Connecting lines on structured side -->
+      <g stroke="#79BFD0" stroke-width="0.8" fill="none" opacity="0.3">
+        <line x1="280" y1="90" x2="260" y2="140"/>
+        <line x1="280" y1="90" x2="300" y2="140"/>
+        <line x1="320" y1="90" x2="300" y2="140"/>
+        <line x1="320" y1="90" x2="340" y2="140"/>
+        <line x1="360" y1="90" x2="340" y2="140"/>
+        <line x1="360" y1="90" x2="380" y2="140"/>
+        <line x1="300" y1="140" x2="280" y2="190"/>
+        <line x1="300" y1="140" x2="320" y2="190"/>
+        <line x1="340" y1="140" x2="320" y2="190"/>
+        <line x1="340" y1="140" x2="360" y2="190"/>
+        <line x1="320" y1="190" x2="300" y2="240"/>
+        <line x1="320" y1="190" x2="340" y2="240"/>
+        <line x1="320" y1="290" x2="300" y2="340"/>
+        <line x1="320" y1="290" x2="340" y2="340"/>
+      </g>
+      <!-- Flow arrows (transformation) -->
+      <g stroke="#79BFD0" stroke-width="1.5" fill="none" opacity="0.5">
+        <path d="M 90 120 Q 115 120 180 115" stroke-dasharray="4,3"/>
+        <path d="M 90 225 Q 115 225 180 220" stroke-dasharray="4,3"/>
+        <path d="M 90 330 Q 115 330 180 325" stroke-dasharray="4,3"/>
+      </g>
+    </svg>
+  </div>
+</body>
+</html>
