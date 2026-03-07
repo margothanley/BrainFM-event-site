@@ -352,6 +352,77 @@
       line-height: 1.55;
     }
 
+    /* ========== SPEAKERS ========== */
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 32px 40px;
+      max-width: 900px;
+    }
+
+    .speaker-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .speaker-photo {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .speaker-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .speaker-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .speaker-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .speaker-name-link {
+      font-family: var(--font-sans);
+      font-size: var(--body);
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .speaker-name-link:hover {
+      color: var(--accent);
+    }
+
+    .speaker-affil {
+      font-size: var(--small);
+      color: var(--muted);
+    }
+
+    .speaker-panel {
+      font-size: 13px;
+      color: var(--quiet);
+    }
+
     /* ========== PROGRAM ========== */
     .program-grid {
       max-width: 640px;
@@ -700,7 +771,7 @@
       <nav class="nav">
         <a href="#" class="nav-brand">e184 × NeuroNYC</a>
         <div class="nav-links">
-          <a href="#purpose">Overview</a> · <a href="#program">Program</a> · <a href="#contact">Request Invite</a> · <a href="#contact">Contact</a>
+          <a href="#purpose">Overview</a> · <a href="#program">Program</a> · <a href="#speakers">Speakers</a> · <a href="#contact">Request Invite</a> · <a href="#contact">Contact</a>
         </div>
       </nav>
 
@@ -819,6 +890,29 @@
               <p class="program-desc">The evening closes with an open reception and a set of small-group discussion tables organized around themes proposed by attendees. Those invited will be asked if there's a topic they'd like to convene — something adjacent to the panels, or a question the field isn't discussing enough. We'll organize tables around what comes up.</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- Divider -->
+      <div class="section-divider dot-80"></div>
+
+      <!-- Speakers Section -->
+      <section id="speakers">
+        <h2 class="section-title">Speakers</h2>
+
+        <div class="speakers-grid">
+
+          <div class="speaker-card">
+            <div class="speaker-photo">
+              <div class="speaker-photo-placeholder">AT</div>
+            </div>
+            <div class="speaker-info">
+              <a href="https://www.linkedin.com/in/andreas-tolias-a5949631/" target="_blank" rel="noopener" class="speaker-name-link">Andreas Tolias</a>
+              <span class="speaker-affil"><a href="https://toliaslab.org" target="_blank" rel="noopener">Tolias Lab, Stanford</a></span>
+              <span class="speaker-panel">Panel 1</span>
+            </div>
+          </div>
+
         </div>
       </section>
 

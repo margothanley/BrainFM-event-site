@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Luma Cover — Foundation Models for the Brain</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1280px; height: 720px; overflow: hidden; background: #e8f4fc; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<canvas id="c" width="1280" height="720"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const W = 1280, H = 720;
+
+  // ── Background ──────────────────────────────────────────────────────────────
+  // Base fill
+  ctx.fillStyle = '#e8f4fc';
+  ctx.fillRect(0, 0, W, H);
+
+  // Radial light washes (mimics the site's body background-image)
+  const washes = [
+    { cx: W * 0.15, cy: H * 0.25, rx: W * 0.55, ry: H * 0.55, alpha: 0.62 },
+    { cx: W * 0.82, cy: H * 0.72, rx: W * 0.45, ry: H * 0.50, alpha: 0.45 },
+    { cx: W * 0.50, cy: H * 1.05, rx: W * 0.70, ry: H * 0.60, alpha: 0.30 },
+  ];
+  washes.forEach(w => {
+    const g = ctx.createRadialGradient(w.cx, w.cy, 0, w.cx, w.cy, Math.max(w.rx, w.ry));
+    g.addColorStop(0, `rgba(255,255,255,${w.alpha})`);
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.save();
+    ctx.scale(w.rx / Math.max(w.rx, w.ry), w.ry / Math.max(w.rx, w.ry));
+    ctx.fillStyle = g;
+    const scale = Math.max(w.rx, w.ry);
+    ctx.beginPath();
+    ctx.arc(w.cx / (w.rx / scale), w.cy / (w.ry / scale), scale, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  });
+
+  // ── Build node grid ──────────────────────────────────────────────────────────
+  // 5 columns × 4 rows of cluster centres across the full canvas
+  const COLS = 5, ROWS = 4;
+  const NODES_PER_CLUSTER = 7;
+  const SPREAD = 38;   // tight cluster radius
+  const EDGE_DIST = 90;
+  const MAX_EDGES = 4;
+
+  const rng = (() => { let s = 42; return () => { s = (s * 1664525 + 1013904223) & 0xffffffff; return (s >>> 0) / 4294967296; }; })();
+
+  // Cluster centres — padded inward so nodes have breathing room at edges
+  const centers = [];
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      centers.push({
+        x: W * 0.10 + (W * 0.80) * (c / (COLS - 1)),
+        y: H * 0.12 + (H * 0.76) * (r / (ROWS - 1)),
+      });
+    }
+  }
+
+  // Generate structured node positions (with small organic jitter)
+  const nodes = [];
+  centers.forEach(ctr => {
+    for (let i = 0; i < NODES_PER_CLUSTER; i++) {
+      const angle = rng() * Math.PI * 2;
+      const radius = rng() * SPREAD;
+      nodes.push({
+        x: ctr.x + Math.cos(angle) * radius,
+        y: ctr.y + Math.sin(angle) * radius,
+        r: 2.5 + rng() * 2.8,
+        colorType: Math.floor(rng() * 3),
+      });
+    }
+  });
+
+  // ── Draw edges first (behind nodes) ─────────────────────────────────────────
+  const edgeColor = 'rgba(121, 191, 208, 0.20)';
+  ctx.strokeStyle = edgeColor;
+  ctx.lineWidth = 1;
+
+  const drawnEdges = new Set();
+  nodes.forEach((a, i) => {
+    const candidates = [];
+    nodes.forEach((b, j) => {
+      if (i === j) return;
+      const dx = a.x - b.x, dy = a.y - b.y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d < EDGE_DIST) candidates.push({ j, d });
+    });
+    candidates.sort((a, b) => a.d - b.d);
+    candidates.slice(0, MAX_EDGES).forEach(({ j }) => {
+      const key = i < j ? `${i}-${j}` : `${j}-${i}`;
+      if (!drawnEdges.has(key)) {
+        drawnEdges.add(key);
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.stroke();
+      }
+    });
+  });
+
+  // ── Draw nodes ───────────────────────────────────────────────────────────────
+  const nodeColors = [
+    'rgba(121, 191, 208, 0.80)',   // primary
+    'rgba(142, 200, 215, 0.70)',   // secondary
+    'rgba(168, 213, 226, 0.60)',   // tertiary
+  ];
+
+  nodes.forEach(n => {
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+    ctx.fillStyle = nodeColors[n.colorType];
+    ctx.fill();
+  });
+
+  // ── Subtle vignette to ground the edges ─────────────────────────────────────
+  const vig = ctx.createRadialGradient(W / 2, H / 2, H * 0.25, W / 2, H / 2, H * 0.85);
+  vig.addColorStop(0, 'rgba(232,244,252,0)');
+  vig.addColorStop(1, 'rgba(220,236,248,0.30)');
+  ctx.fillStyle = vig;
+  ctx.fillRect(0, 0, W, H);
+
+})();
+</script>
+</body>
+</html>
